@@ -1,0 +1,53 @@
+{
+   "about": [
+      "abat",
+      "abaut"
+   ],
+   "doctor": [
+      "doc"
+   ],
+   "dr": [
+      "doc"
+   ],
+   "next": [
+      "nex",
+      "enxt"
+   ],
+   "take": [
+      "tak",
+      "taek"
+   ],
+   "the": [
+      {
+         "spelling": "the",
+         "weight": 2
+      },
+      {
+         "spelling": "thi",
+         "weight": 1
+      },
+      {
+         "spelling": "tee",
+         "weight": 2
+      }
+   ],
+   "you": [
+      {
+         "spelling": "ya",
+         "weight": 1
+      },
+      {
+         "spelling": "yah",
+         "weight": 1
+      }
+   ],
+   "was": [
+      "were"
+   ],
+   "were": [
+      "was"
+   ],
+   "woman": [
+      "bimbo"
+   ]
+}
