@@ -3,19 +3,86 @@
       "abat",
       "abaut"
    ],
+   "are": [
+      {
+         "spelling": "is",
+         "weight": 1
+      },
+      {
+         "spelling": "are",
+         "weight": 1
+      }
+   ],
    "doctor": [
       "doc"
    ],
    "dr": [
       "doc"
    ],
+   "farther": [
+      "further",
+      "farther"
+   ],
+   "fewer": [
+      "less",
+      "fewer"
+   ],
+   "further": [
+      {
+         "synonym": "farther"
+      }
+   ],
+   "female": [
+      {
+         "synonym": "woman"
+      }
+   ],
+   "know": [
+      "knw",
+      "konw",
+      "nkow"
+   ],
+   "large": [
+      "huge",
+      "big",
+      "ginormous"
+   ],
+   "less": [
+      {
+         "synonym": "fewer"
+      }
+   ],
+   "library": [
+      "libary"
+   ],
+   "like": [
+      "like"
+   ],
+   "is": [
+      {
+         "spelling": "is",
+         "weight": 1
+      },
+      {
+         "spelling": "are",
+         "weight": 1
+      }
+   ],
    "next": [
       "nex",
       "enxt"
    ],
+   "probably": [
+      "probly",
+      "prolly"
+   ],
    "take": [
       "tak",
       "taek"
+   ],
+   "than": [
+      "than",
+      "then"
    ],
    "the": [
       {
@@ -31,6 +98,11 @@
          "weight": 2
       }
    ],
+   "then": [
+      {
+         "synonym": "than"
+      }
+   ],
    "you": [
       {
          "spelling": "ya",
@@ -38,6 +110,10 @@
       },
       {
          "spelling": "yah",
+         "weight": 1
+      },
+      {
+         "spelling": "u",
          "weight": 1
       }
    ],
@@ -48,6 +124,33 @@
       "was"
    ],
    "woman": [
-      "bimbo"
+      {
+         "spelling": "bimbo",
+         "weight": 1
+      },
+      {
+         "spelling": "chick",
+         "weight": 0.4
+      },
+      {
+         "spelling": "girl",
+         "weight": 1
+      },
+      {
+         "spelling": "pussycat",
+         "weight": 0.7
+      },
+      {
+         "spelling": "pussygirl",
+         "weight": 0.4
+      },
+      {
+         "spelling": "fuckdoll",
+         "weight": 0.4
+      },
+      {
+         "spelling": "doll",
+         "weight": 0.4
+      }
    ]
 }

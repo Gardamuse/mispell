@@ -9,7 +9,10 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "compromise": "^11.13.2",
+    "pluralize": "^7.0.0"
+  },
   "devDependencies": {
     "esm": "^3.2.20"
   }
