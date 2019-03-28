@@ -39,8 +39,9 @@ function bimbofy(text, bf) {
       })
       doc.adjectives().forEach((match) => {
          // Don't insert before words beginning with quotation marks
-         if (match.data()[0].text.charAt(0) != '"') {
-            //console.log("Ye:", match.data()[0].text);
+         // Words might start with a space, so checking for any quotations
+         if (!match.data()[0].text.includes('"')) {
+            console.log("Adj:", match.data()[0].text);
             let rw = pickRandomWeighted([
                {spelling: 'literally', weight: 0.5},
                {spelling: 'totally', weight: 1},
@@ -94,15 +95,15 @@ function bimbofy(text, bf) {
       if (singular === word) isSingular = true
       if (word !== "s") word = singular //Ignore lonely 's or they are removed
 
-
       // If there is a misspelling, maybe misspell it
       if (Math.random() < 0.5 * bf) {
          // DICTIONARY MISSPELLING
-         word = pickSpelling(word)
+         let spelling = pickSpelling(word)
 
          // Replace underscores in dict with spaces
-         word = word.replace('_', ' ')
-
+         if (spelling !== word) {
+            word = spelling.replace('_', ' ')
+         }
       }
       if (Math.random() < 0.5 * bf) {
          // REGEXP MISSPELLING
