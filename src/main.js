@@ -27,21 +27,19 @@ function bimbofy(text, bf) {
       let rand = Math.random()
       // Of everything that is not a verb at end of sentence, pick all verbs
       doc.not('#Verb$').match('#Verb').forEach((match) => {
-         if (Math.random() < 0.7 * bf) {
+         if (Math.random() < 0.6 * bf) {
             let rw = pickRandomWeighted([
                {spelling: ', like,', weight: 1},
-               {spelling: ', kinda', weight: 0.3},
-               {spelling: ', sorta', weight: 0.3},
-               {spelling: ', like whatever,', weight: 0.3}
+               {spelling: ', like whatever,', weight: 0.2}
             ]).spelling
             match.setPunctuation(rw)//.insertAfter(rw);
          }
       })
-      doc.adjectives().forEach((match) => {
+      doc.not('^#Adjective').match('#Adjective').forEach((match) => {
          // Don't insert before words beginning with quotation marks
          // Words might start with a space, so checking for any quotations
          if (!match.data()[0].text.includes('"')) {
-            console.log("Adj:", match.data()[0].text);
+            //console.log("Adj:", match.data()[0].text);
             let rw = pickRandomWeighted([
                {spelling: 'literally', weight: 0.5},
                {spelling: 'totally', weight: 1},
@@ -54,13 +52,21 @@ function bimbofy(text, bf) {
                {spelling: 'um', weight: 0.4},
                {spelling: 'uh,', weight: 1}
             ]).spelling
+            let rw3 = pickRandomWeighted([
+               {spelling: 'kinda', weight: 1},
+               {spelling: 'sorta', weight: 1},
+            ]).spelling
 
             if (Math.random() < 0.2 * bf) {
                match.insertBefore(rw2);
             }
+            if (Math.random() < 0.5 * bf) {
+               match.insertBefore(rw3);
+            }
             if (Math.random() < 0.8 * bf) {
                match.insertBefore(rw);
             }
+
          }
       })
       /*doc.adjectives().filter(() => {
@@ -107,7 +113,7 @@ function bimbofy(text, bf) {
       }
       if (Math.random() < 0.5 * bf) {
          // REGEXP MISSPELLING
-         word = removeDuplicateChars(word)
+         word = misspellByRule(word)
       }
 
       // RESTORE
@@ -119,12 +125,12 @@ function bimbofy(text, bf) {
       // Write back
       words[i] = word
    }
-   //console.log(removeDuplicateChars("summation"));
+   //console.log(misspellByRule("summation"));
 
    return words.join('')
 }
 
-console.log(bimbofy(data.text2, 1));
+console.log(bimbofy(data.text, 1));
 
 function pickSpelling(word) {
    if (!(word in dict)) return word
@@ -160,14 +166,39 @@ function pickRandom(list) {
    return list[Math.floor(Math.random()*list.length)];
 }
 
-function removeDuplicateChars(string) {
+function misspellByRule(string) {
    lastChar = ""
    output = ""
+   //console.log(string);
+   string = string.replace(/bility\b/, "ilty")
+   string = string.replace(/tible\b/, "tidle")
+   string = string.replace(/tes\b/, "ties")
+   string = string.replace(/ces\b/, "cies")
+   string = string.replace(/ges\b/, "gies")
+   string = string.replace(/uter\b/, "tuer")
+   //console.log(string);
    for (let i = 0; i < string.length; i++) {
-      if (lastChar !== string.charAt(i)) {
-         output += string.charAt(i)
-         lastChar = string.charAt(i)
+      let c = string.charAt(i);
+      if (c === "." || c === "!" || c === "?") {
+         // Do nothing
+      } else if (lastChar === "t" && c === "h") { // th
+         output = output.slice(0, -1) + "d"
+         lastChar = "d"
+         continue
+      } else if (lastChar === "e" && c === "e") { // ee
+         output = output.slice(0, -1) + "i"
+         lastChar = "i"
+         continue
+      } if (lastChar === "o" && c === "u") { // ou
+         output = output.slice(0, -1) + "u"
+         lastChar = "u"
+         continue
+      } else if (c === lastChar) { // Repeated character
+         lastChar = c
+         continue
       }
+      lastChar = c
+      output += c
    }
    //console.log(string, "->", output);
    return output

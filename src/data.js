@@ -33,7 +33,7 @@ function buildDict(paths) {
    return dict
 }
 
-module.exports.text = `"So, that's about the summation of it. I know it's probably a lot to take in all at once, but, hopefully it makes sense for you 2?" The short, black-haired woman stood next to her partner as they addressed two pretty young females. The other two women stayed silent, trying to process all the information they'd been given. It was the pink-haired, flat-chested ninja who spoke up first after rubbing her chin for some time.`
+module.exports.text = `The heavy silence in the old room was finally broken by a tiny 'clink' sound as a crystal clear ice cube shifted in a short, heavy glass. Massive velvet curtains blocked all outside light to the room. A huge mahogany desk lived in an oasis of soft yellow light that emanated from dark green lamps. The world beyond was darkness and the pale, overweight man sitting behind the desk looked as if he had lived his entire life in that tiny realm. `
 
 module.exports.text2 = `
 <div bf="0">

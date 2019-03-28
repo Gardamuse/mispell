@@ -3,6 +3,11 @@
       "abat",
       "abaut"
    ],
+   "actually": [
+      "actualy",
+      "actauly",
+      "actuali"
+   ],
    "are": [
       {
          "spelling": "is",
@@ -13,8 +18,31 @@
          "weight": 1
       }
    ],
+   "basically": [
+      "basicaly",
+      "basicly",
+      "baesicly"
+   ],
+   "breast": [
+      "boob",
+      "tit"
+   ],
+   "but": [
+      "butt"
+   ],
+   "butt": [
+      "ass"
+   ],
+   "computer": [
+      "cumputer",
+      "cumputr",
+      "comptuer"
+   ],
    "doctor": [
       "doc"
+   ],
+   "development": [
+      "delevopment"
    ],
    "dr": [
       "doc"
@@ -77,6 +105,16 @@
       "nex",
       "enxt"
    ],
+   "room": [
+      {
+         "spelling": "room",
+         "weight": 10
+      },
+      {
+         "spelling": "roo",
+         "weight": 1
+      }
+   ],
    "probably": [
       "probly",
       "prolly"
@@ -89,6 +127,13 @@
       "than",
       "then"
    ],
+   "that": [
+      "taht",
+      "tat",
+      "tht",
+      "tyhat",
+      "tah"
+   ],
    "the": [
       {
          "spelling": "the",
@@ -99,8 +144,12 @@
          "weight": 1
       },
       {
-         "spelling": "tee",
-         "weight": 2
+         "spelling": "dee",
+         "weight": 1
+      },
+      {
+         "spelling": "de",
+         "weight": 1
       }
    ],
    "then": [
