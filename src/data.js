@@ -20,9 +20,9 @@ function parseDollarDict(paths) {
       }
    }
    //console.log(dict.American);
-   fs.writeFileSync('dict.json', JSON.stringify(dict, null, 3), 'utf8')
+   fs.writeFileSync('res/dict.json', JSON.stringify(dict, null, 3), 'utf8')
 }
-parseDollarDict(['wikipedia.dat'])
+parseDollarDict(['res/wikipedia.dat'])
 
 // Later dicts will override the values of earlier ones for mutual keys
 function buildDict(paths) {
@@ -135,4 +135,4 @@ THE END
 </div>
 `
 
-module.exports.dict = buildDict(['dict.json', 'bimbo-dict.json'])
+module.exports.dict = buildDict(['res/dict.json', 'res/bimbo-dict.json'])

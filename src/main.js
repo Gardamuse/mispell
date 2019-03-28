@@ -29,12 +29,12 @@ function bimbofy(text, bf) {
       doc.not('#Verb$').match('#Verb').forEach((match) => {
          if (Math.random() < 0.7 * bf) {
             let rw = pickRandomWeighted([
-               {spelling: 'like,', weight: 1},
-               {spelling: 'kinda', weight: 0.3},
-               {spelling: 'sorta', weight: 0.3},
-               {spelling: 'like, whatever,', weight: 0.3}
+               {spelling: ', like,', weight: 1},
+               {spelling: ', kinda', weight: 0.3},
+               {spelling: ', sorta', weight: 0.3},
+               {spelling: ', like whatever,', weight: 0.3}
             ]).spelling
-            match.insertAfter(rw);
+            match.setPunctuation(rw)//.insertAfter(rw);
          }
       })
       doc.adjectives().forEach((match) => {
