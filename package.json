@@ -1,19 +1,25 @@
 {
-  "name": "bimbo-misspell",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "module": "main.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "compromise": "^11.13.2",
-    "pluralize": "^7.0.0"
-  },
-  "devDependencies": {
-    "esm": "^3.2.20"
-  }
+   "name": "bimbo-misspell",
+   "version": "1.0.0",
+   "description": "",
+   "private": true,
+   "main": "dist/bimbo-misspell.js",
+   "module": "src/main.js",
+   "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "build": "nodejs src/preProcess.js && webpack && cp dist/bimbo-misspell.js ../gardamuse.github.io/scripts/",
+      "watch": "npx webpack --watch",
+      "start": "webpack-dev-server --open 'opera'"
+   },
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
+      "compromise": "^11.13.2",
+      "pluralize": "^7.0.0"
+   },
+   "devDependencies": {
+      "esm": "^3.2.20",
+      "webpack": "^4.29.6",
+      "webpack-cli": "^3.3.0"
+   }
 }

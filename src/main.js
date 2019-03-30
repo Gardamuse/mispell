@@ -10,7 +10,7 @@ const nlp = require('compromise')
 /**
  * @param {double} bf - BimboFactor, a value between 0 and 1 describing the current level of bimbofication.
  */
-function bimbofy(text, bf) {
+export function bimbofy(text, bf) {
    // Replace curly quotes in text
    text = text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
 
@@ -29,8 +29,8 @@ function bimbofy(text, bf) {
       doc.not('#Verb$').match('#Verb').forEach((match) => {
          if (Math.random() < 0.6 * bf) {
             let rw = pickRandomWeighted([
-               {spelling: ', like,', weight: 1},
-               {spelling: ', like whatever,', weight: 0.2}
+               {spelling: ', like,', weight: 1.5},
+               {spelling: ', like whatever,', weight: 0.1}
             ]).spelling
             match.setPunctuation(rw)//.insertAfter(rw);
          }
@@ -43,7 +43,7 @@ function bimbofy(text, bf) {
             let rw = pickRandomWeighted([
                {spelling: 'literally', weight: 0.5},
                {spelling: 'totally', weight: 1},
-               {spelling: 'actually', weight: 1},
+               {spelling: 'actually', weight: 0.5},
                {spelling: 'basically', weight: 1},
                {spelling: 'absolutely', weight: 1},
                {spelling: 'you know,', weight: 1}
@@ -92,7 +92,9 @@ function bimbofy(text, bf) {
 
       // Remove capitalization. Save it for later.
       let capitalLetter = false
+      let capitalAll = false
       if (word[0] === word[0].toUpperCase()) capitalLetter = true
+      if (word.slice(-1) === word.slice(-1).toUpperCase()) capitalAll = true
       word = word.toLowerCase()
 
       // Remove plural form
@@ -119,6 +121,7 @@ function bimbofy(text, bf) {
       // RESTORE
       // Restore capital letter if any
       if (capitalLetter) word = word.charAt(0).toUpperCase() + word.slice(1)
+      if (capitalAll) word = word.toUpperCase()
       // Restore pluralization
       if (!isSingular) word = pluralize(word, 2)
 
@@ -129,8 +132,6 @@ function bimbofy(text, bf) {
 
    return words.join('')
 }
-
-console.log(bimbofy(data.text, 1));
 
 function pickSpelling(word) {
    if (!(word in dict)) return word
@@ -167,8 +168,8 @@ function pickRandom(list) {
 }
 
 function misspellByRule(string) {
-   lastChar = ""
-   output = ""
+   let lastChar = ""
+   let output = ""
    //console.log(string);
    string = string.replace(/bility\b/, "ilty")
    string = string.replace(/tible\b/, "tidle")
@@ -179,7 +180,7 @@ function misspellByRule(string) {
    //console.log(string);
    for (let i = 0; i < string.length; i++) {
       let c = string.charAt(i);
-      if (c === "." || c === "!" || c === "?") {
+      if (c === "." || c === "." || c === "!" || c === "?") {
          // Do nothing
       } else if (lastChar === "t" && c === "h") { // th
          output = output.slice(0, -1) + "d"
