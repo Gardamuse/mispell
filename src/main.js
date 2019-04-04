@@ -27,7 +27,7 @@ export function bimbofy(text, bf) {
       let rand = Math.random()
       // Of everything that is not a verb at end of sentence, pick all verbs
       doc.not('#Verb$').match('#Verb').forEach((match) => {
-         if (Math.random() < 0.6 * bf) {
+         if (Math.random() < 0.4 * bf) {
             let rw = pickRandomWeighted([
                {spelling: ', like,', weight: 1.5},
                {spelling: ', like whatever,', weight: 0.1}
@@ -60,10 +60,10 @@ export function bimbofy(text, bf) {
             if (Math.random() < 0.2 * bf) {
                match.insertBefore(rw2);
             }
-            if (Math.random() < 0.5 * bf) {
+            if (Math.random() < 0.3 * bf) {
                match.insertBefore(rw3);
             }
-            if (Math.random() < 0.8 * bf) {
+            if (Math.random() < 0.6 * bf) {
                match.insertBefore(rw);
             }
 
