@@ -10,7 +10,7 @@ const nlp = require('compromise')
 /**
  * @param {double} bf - BimboFactor, a value between 0 and 1 describing the current level of bimbofication.
  */
-export function bimbofy(text, bf) {
+module.exports.bimbofy = function (text, bf) {
    // Replace curly quotes in text
    text = text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
 

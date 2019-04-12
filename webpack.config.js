@@ -8,7 +8,11 @@ const serverConfig = {
       library: 'mispell',
       libraryTarget: 'commonjs2'
    },
-   mode: 'development',
+   performance: {
+      maxEntrypointSize: 350000,
+      maxAssetSize: 350000
+   },
+   mode: 'production',
    module: {
    }
 };
@@ -21,7 +25,11 @@ const clientConfig = {
       library: 'mispell',
       libraryTarget: 'var'
    },
-   mode: 'development',
+   performance: {
+      maxEntrypointSize: 350000,
+      maxAssetSize: 350000
+   },
+   mode: 'production',
    module: {
    }
 };
