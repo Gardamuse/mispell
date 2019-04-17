@@ -51,6 +51,9 @@
       "further",
       "farther"
    ],
+   "favorite": [
+      "fav"
+   ],
    "fewer": [
       "less",
       "fewer"
@@ -87,7 +90,7 @@
       "like"
    ],
    "love": [
-      "loe",
+      "luv",
       "lve",
       "<3"
    ],
@@ -118,6 +121,19 @@
    "probably": [
       "probly",
       "prolly"
+   ],
+   "photo": [
+      {
+         "synonym": "picture"
+      }
+   ],
+   "picture": [
+      "pic"
+   ],
+   "so": [
+      "so",
+      "soo",
+      "sooo"
    ],
    "take": [
       "tak",
@@ -156,6 +172,14 @@
       {
          "synonym": "than"
       }
+   ],
+   "very": [
+      {
+         "spelling": "all"
+      }
+   ],
+   "video": [
+      "vid"
    ],
    "you": [
       {

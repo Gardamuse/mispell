@@ -7,12 +7,29 @@ const nlp = require('compromise')
 
 //console.log(dict)
 
+class FrequencyLog {
+   constructor() {
+      this.lastLike = 0
+   }
+
+   allowLike() {
+      if (this.lastLike > 2) {
+         this.lastLike = 0
+         return true
+      }
+      this.lastLike += 1
+      return false
+   }
+}
+
 /**
  * @param {double} bf - BimboFactor, a value between 0 and 1 describing the current level of bimbofication.
  */
 module.exports.bimbofy = function (text, bf) {
    // Replace curly quotes in text
    text = text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
+   fqLog = new FrequencyLog()
+   enabled = true
 
    // NATURAL LANGUAGE PROCESSING LIBRARY
    // Spell out numbers
@@ -25,11 +42,57 @@ module.exports.bimbofy = function (text, bf) {
    }
    {
       let rand = Math.random()
+      // Begin some sentences with "Sooo"
+      // End some sentences with ", like, you know"
+      //doc.out('debug')
+      doc.sentences().forEach((match) => {
+         //let sentence = nlp(match.data()[0].text)
+         //sentence.sentences().prepend('sooo,');
+         //console.log("Sentence:", match);
+         match.out('debug')
+      })
+      doc.match('!#EndQuotation #Verb #Noun').forEach((match) => {
+         if (Math.random() < 0.3 * bf && enabled) {
+            let rw = pickRandomWeighted([
+               {spelling: 'basically', weight: 1},
+               {spelling: 'totally', weight: 1},
+            ]).spelling
+            //console.log("2:", match.data()[0])
+            match.insertAfter(rw)
+         }
+      })
+      doc.match('!#EndQuotation [#Conjunction] #Verb').forEach((match) => {
+         if (Math.random() < 0.3 * bf && enabled) {
+            let rw = pickRandomWeighted([
+               {spelling: 'basically', weight: 1},
+               {spelling: 'totally', weight: 1}
+            ]).spelling
+            //console.log("2:", match.data()[0])
+            match.insertAfter(rw)
+         }
+      })
+      doc.match('#Value').values().toNumber().forEach((match) => {
+         let w = match.data()[0].nice
+         //match.replace()
+         //w.replace('0', '?')
+         //console.log(w);
+         //match.out('debug')
+      })
+      // Country girl speech: giving -> givin'
+      doc.not('#Verb$').match('#Verb').match('_ing').forEach((match) => {
+         if (Math.random() < 1 && enabled) {
+            let w = match.data()[0].normal
+            match.replaceWith(w.replace('ing', 'in\''))
+            //console.log(match.data()[0]);
+         }
+      })
+      //doc.match('(are|were|was)').insertAfter('sooo');
       // Of everything that is not a verb at end of sentence, pick all verbs
       doc.not('#Verb$').match('#Verb').forEach((match) => {
-         if (Math.random() < 0.4 * bf) {
+         if (fqLog.allowLike() && Math.random() < 0.4 * bf && enabled) {
             let rw = pickRandomWeighted([
-               {spelling: ', like,', weight: 1.5},
+               //{spelling: ' like', weight: 0.7},
+               {spelling: ', like,', weight: 0.7},
                {spelling: ', like whatever,', weight: 0.1}
             ]).spelling
             match.setPunctuation(rw)//.insertAfter(rw);
@@ -42,7 +105,7 @@ module.exports.bimbofy = function (text, bf) {
             //console.log("Adj:", match.data()[0].text);
             let rw = pickRandomWeighted([
                {spelling: 'literally', weight: 0.5},
-               {spelling: 'totally', weight: 1},
+               //{spelling: 'totally', weight: 1},
                {spelling: 'actually', weight: 0.5},
                {spelling: 'basically', weight: 1},
                {spelling: 'absolutely', weight: 1},
@@ -57,13 +120,13 @@ module.exports.bimbofy = function (text, bf) {
                {spelling: 'sorta', weight: 1},
             ]).spelling
 
-            if (Math.random() < 0.2 * bf) {
+            if (Math.random() < 0.2 * bf && enabled) {
                match.insertBefore(rw2);
             }
-            if (Math.random() < 0.3 * bf) {
+            if (Math.random() < 0.3 * bf && enabled) {
                match.insertBefore(rw3);
             }
-            if (Math.random() < 0.6 * bf) {
+            if (Math.random() < 0.6 * bf && enabled) {
                match.insertBefore(rw);
             }
 
@@ -75,6 +138,13 @@ module.exports.bimbofy = function (text, bf) {
    }
    text = doc.out('text')
 
+   if (enabled) {
+      //text = manualProcessing(text, bf)
+   }
+   return text
+}
+
+function manualProcessing(text, bf) {
    // MANUAL PROCESSING
    // Split text on word boundaries
    let words = text.split(/\b/g)
@@ -204,18 +274,3 @@ function misspellByRule(string) {
    //console.log(string, "->", output);
    return output
 }
-
-/* Unneccessary words to add
-actually
-like
-honestly
-literally
-really
-totally
-uh
-um
-whatever
-you know
-
-fabulous
-*/

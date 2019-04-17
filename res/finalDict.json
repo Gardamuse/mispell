@@ -3581,7 +3581,7 @@
       "alo"
    ],
    "love": [
-      "loe",
+      "luv",
       "lve",
       "<3"
    ],
@@ -6260,10 +6260,9 @@
       "verficatio"
    ],
    "very": [
-      "vey",
-      "vre",
-      "vye",
-      "vyr"
+      {
+         "spelling": "all"
+      }
    ],
    "vicinity": [
       "vacinit"
@@ -7525,6 +7524,9 @@
       "further",
       "farther"
    ],
+   "favorite": [
+      "fav"
+   ],
    "fewer": [
       "less",
       "fewer"
@@ -7553,6 +7555,22 @@
          "spelling": "are",
          "weight": 1
       }
+   ],
+   "photo": [
+      {
+         "synonym": "picture"
+      }
+   ],
+   "picture": [
+      "pic"
+   ],
+   "so": [
+      "so",
+      "soo",
+      "sooo"
+   ],
+   "video": [
+      "vid"
    ],
    "you": [
       {
