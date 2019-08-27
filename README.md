@@ -3,10 +3,12 @@ This application transforms text into something that sounds more like something 
 
 The frequency of replacement and misspelling is decided by a "bimbofactor" value, ranging from 0 to 1. This value can be even higher, which will increase the frequency more, but 1 is balanced to be what sounds maximally bimbo-like while maintaining some level of readability.
 
+## Installation
+There are two versions of the library. One for use with node `mispell.node.js`, and one for easy inclusion in html `mispell.js`. If you don't want to build them yourself you can download the [latest release](https://github.com/Gardamuse/mispell/releases/latest) or install using npm: `npm i mispell`.
+
+
 ## Usage
 The library exposes one function `bimbofy(String, Float)` that takes the text you want to transform as the first argument and a number between 0 and 1 to determine how much the text is transformed.
-
-There are two versions of the library. One for use with node `mispell.node.js`, and one for easy inclusion in html `mispell.js`.
 
 __Node__:
 ```js
