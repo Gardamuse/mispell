@@ -1,4 +1,5 @@
 const mispell = require('./main.js')
+//const mispell = require('../dist/mispell.node.js')
 
 let text = `"Fine, fine, I'll do it," she groaned, giving in.
 

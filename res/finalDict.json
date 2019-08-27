@@ -1775,8 +1775,9 @@
       "corosio"
    ],
    "could": [
-      "coud",
-      "soul"
+      {
+         "synonym": "should"
+      }
    ],
    "councillor": [
       "councello"
@@ -2829,7 +2830,9 @@
       "ga"
    ],
    "game": [
-      "ga"
+      "game",
+      "gaem",
+      "gam"
    ],
    "gases": [
       "gasse"
@@ -5304,9 +5307,12 @@
       "shinein"
    ],
    "should": [
-      "shoud",
-      "shoudl",
-      "soul"
+      "should",
+      "shud",
+      "would",
+      "wudd",
+      "could",
+      "cudd"
    ],
    "shouldn't": [
       "shoudl",
@@ -6450,8 +6456,9 @@
       "worstene"
    ],
    "would": [
-      "owud",
-      "woud"
+      {
+         "synonym": "should"
+      }
    ],
    "write": [
       "rwit",
@@ -6529,7 +6536,11 @@
       "annonsmen"
    ],
    "anonymous": [
-      "anynomou"
+      "anonymous",
+      "anynomous",
+      "anynomous",
+      "anonymus",
+      "anynomus"
    ],
    "appreciated": [
       "appreceiate"
@@ -7568,6 +7579,11 @@
       "so",
       "soo",
       "sooo"
+   ],
+   "thus": [
+      {
+         "synonym": "so"
+      }
    ],
    "video": [
       "vid"

@@ -3,6 +3,26 @@ This application transforms text into something that sounds more like something 
 
 The frequency of replacement and misspelling is decided by a "bimbofactor" value, ranging from 0 to 1. This value can be even higher, which will increase the frequency more, but 1 is balanced to be what sounds maximally bimbo-like while maintaining some level of readability.
 
+## Usage
+The library exposes one function `bimbofy(String, Float)` that takes the text you want to transform as the first argument and a number between 0 and 1 to determine how much the text is transformed.
+
+There are two versions of the library. One for use with node `mispell.node.js`, and one for easy inclusion in html `mispell.js`.
+
+__Node__:
+```js
+const mispell = require('./mispell.node.js')
+mispell.bimbofy("Hello", 0.75)
+```
+
+__Html + JS__, just add a script tag in the html file to load the library before any JS is going to use it:
+```html
+<script src="/scripts/mispell.js"></script>
+```
+Then use it in your JS:
+```js
+mispell.bimbofy("Hello", 0.75)
+```
+
 ## Resources
 The files `res/aspell.dat`, `res/birkbeck.dat` and `res/wikipedia.dat` contain common misspellings in the following format: Each correct word is preceded by a dollar sign and followed by its misspellings, each on one line, without duplicates. (A misspelling might appear more than once in the corpus, but only as a misspelling of different words.) Where the spelling or misspelling contained a space, this has been replaced by an underscore (a_lot, Christ_mas). While most of the misspellings are non-words, there are also some real-word errors, such as "omitted" for "admitted". For more information, see the [page they were downloaded from](https://www.dcs.bbk.ac.uk/~ROGER/corpora.html).
 
