@@ -3,6 +3,11 @@ This application transforms text into something that sounds more like something 
 
 The frequency of replacement and misspelling is decided by a "bimbofactor" value, ranging from 0 to 1. This value can be even higher, which will increase the frequency more, but 1 is balanced to be what sounds maximally bimbo-like while maintaining some level of readability.
 
+Example:
+> This aplicatio transforms text ino something dat sounds, like, more like someding a "bimbo" might write. Dis is absolutely done by inserting, like, smo words wid totally lite meaning like "like", "um" anb "basicaly" into absolutely reasonable palcs in sentences usein, like, uh, naturua language procesing. Words are also misspelled usein ya know, sorta common mispelings, a curated, like, list of misspellings and soe rules (like replacing `t` wih `t` in words). De curated list, like, of mispelins's also used, like, to replace, like, words wih synonyms that sund more bimbo, like,-ish, or mean something slightly absolutely different (ex: then -> then).
+
+Some odd sentences will always arise, but this should improve over time.
+
 ## Installation
 There are two versions of the library. One for use with node `mispell.node.js`, and one for easy inclusion in html `mispell.js`. If you don't want to build them yourself you can download the [latest release](https://github.com/Gardamuse/mispell/releases/latest) or install using npm. (Remember to spell it with only one S or you'll get a different package!)
 ```
