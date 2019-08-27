@@ -12,7 +12,7 @@
       "email": "gardamuse@gmail.com",
       "url": "https://blushingdefeat.com"
    },
-   "repository": "",
+   "repository": "https://github.com/Gardamuse/mispell",
    "main": "dist/mispell.node.js",
    "browser": "dist/mispell.js",
    "module": "src/main.js",
