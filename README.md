@@ -10,7 +10,8 @@ There are two versions of the library. One for use with node `mispell.node.js`, 
 
 __Node__:
 ```js
-const mispell = require('./mispell.node.js')
+// const mispell = require('./mispell.node.js') // if using the file directly
+const mispell = require('mispell') // if installed via npm
 mispell.bimbofy("Hello", 0.75)
 ```
 
@@ -22,6 +23,9 @@ Then use it in your JS:
 ```js
 mispell.bimbofy("Hello", 0.75)
 ```
+
+# Development
+Build the project using `npm build`. When developing it is usually necessary to try things out for yourself, this is done in the devStart.js file. Run this file with `npm run devStart`.
 
 ## Resources
 The files `res/aspell.dat`, `res/birkbeck.dat` and `res/wikipedia.dat` contain common misspellings in the following format: Each correct word is preceded by a dollar sign and followed by its misspellings, each on one line, without duplicates. (A misspelling might appear more than once in the corpus, but only as a misspelling of different words.) Where the spelling or misspelling contained a space, this has been replaced by an underscore (a_lot, Christ_mas). While most of the misspellings are non-words, there are also some real-word errors, such as "omitted" for "admitted". For more information, see the [page they were downloaded from](https://www.dcs.bbk.ac.uk/~ROGER/corpora.html).
