@@ -26,14 +26,19 @@ class FrequencyLog {
  * @param {double} bf - BimboFactor, a value between 0 and 1 describing the current level of bimbofication.
  */
 module.exports.bimbofy = function (text, bf) {
+   if (text == "") return "";
    // Replace curly quotes in text
    text = text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
    fqLog = new FrequencyLog()
-   enabled = true
+   enabled = false
 
    // NATURAL LANGUAGE PROCESSING LIBRARY
    // Spell out numbers
    let doc = nlp(text)
+
+   doc.sentences(0)
+   .prepend('soo')
+
    if (bf > 0.5) {
       //doc.values().toText()
    }
@@ -45,12 +50,17 @@ module.exports.bimbofy = function (text, bf) {
       // Begin some sentences with "Sooo"
       // End some sentences with ", like, you know"
       //doc.out('debug')
-      doc.sentences().forEach((match) => {
+      /*doc.sentences().forEach((match) => {
          //let sentence = nlp(match.data()[0].text)
          //sentence.sentences().prepend('sooo,');
          //console.log("Sentence:", match);
          match.out('debug')
+         //match.prepend('soo,')
+      })*/
+      doc.match('#TitleCase').forEach((match) => {
+         //match.out('debug')
       })
+      // EndQuotation doesn't seem to match anything.
       doc.match('!#EndQuotation #Verb #Noun').forEach((match) => {
          if (Math.random() < 0.3 * bf && enabled) {
             let rw = pickRandomWeighted([
@@ -173,8 +183,8 @@ function manualProcessing(text, bf) {
       if (singular === word) isSingular = true
       if (word !== "s") word = singular //Ignore lonely 's or they are removed
 
-      // If there is a misspelling, maybe misspell it
-      if (Math.random() < 0.5 * bf) {
+      // If there is a misspelling, misspell it
+      {
          // DICTIONARY MISSPELLING
          let spelling = pickSpelling(word)
 

@@ -1,4 +1,11 @@
 {
+   "anonymous": [
+      "anonymous",
+      "anynomous",
+      "anynomous",
+      "anonymus",
+      "anynomus"
+   ],
    "about": [
       "abat",
       "abaut"
@@ -32,6 +39,11 @@
    ],
    "butt": [
       "ass"
+   ],
+   "could": [
+      {
+         "synonym": "should"
+      }
    ],
    "computer": [
       "cumputer",
@@ -68,6 +80,11 @@
          "synonym": "woman"
       }
    ],
+   "game": [
+      "game",
+      "gaem",
+      "gam"
+   ],
    "know": [
       "knw",
       "konw",
@@ -93,6 +110,14 @@
       "luv",
       "lve",
       "<3"
+   ],
+   "should": [
+      "should",
+      "shud",
+      "would",
+      "wudd",
+      "could",
+      "cudd"
    ],
    "is": [
       {
@@ -173,6 +198,11 @@
          "synonym": "than"
       }
    ],
+   "thus": [
+      {
+         "synonym": "so"
+      }
+   ],
    "very": [
       {
          "spelling": "all"
@@ -229,6 +259,11 @@
       {
          "spelling": "doll",
          "weight": 0.4
+      }
+   ],
+   "would": [
+      {
+         "synonym": "should"
       }
    ]
 }

@@ -6,8 +6,7 @@ let text = `"Fine, fine, I'll do it," she groaned, giving in.
 
 Sophie, twenty years old, had been sitting on their couch watching TV when he came in waving a bag around. "Hun, you wouldn't believe what I've bought for 13 dollars," he had said before producing a bottle of purple fluid. He went on to say that he had bought a potion from a stall on the way home from work. Apparently it was supposed to make her more attractive. Like she wasn't attractive enough! What was he trying to say? She thought she looked good enough, with her slim body, long brunette hair and deep green eyes. Sure, she wasn't the curviest of women, but she didn't mind that about herself. She thought Tim shared her view until he came home with the bottle.
 `
-let text2 = `
-Over the past hour there had been argument after argument. Finally, she caved after repeated stutterings of "I do love you the way you are, but why not just give this a try?" After the initial outrage, she had come around to his point of view. If this potion was supposed to make her more attractive, then what did she have to lose?
+let text2 = `Over the past hour there had been argument after argument. Finally, she caved after Tim's repeated stutterings of "I do love you the way you are, but why not just give this a try?" After the initial outrage, she had come around to his point of view. If this potion was supposed to make her more attractive, then what did she have to lose?
 
 Sophie brought the vial to her soft lips and drank, downing it all in one go. When she finished and set it down on the table beside the couch, she saw Tim looking at her with wide eyes. "You weren't supposed to take it all in one go…" he said, biting his lip anxiously.
 
