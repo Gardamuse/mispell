@@ -30,7 +30,7 @@ module.exports.bimbofy = function (text, bf) {
    // Replace curly quotes in text
    text = text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
    fqLog = new FrequencyLog()
-   enabled = false
+   enabled = true // Debug tool. Enabled = true makes some transforms not run.
 
    // NATURAL LANGUAGE PROCESSING LIBRARY
    // Spell out numbers
@@ -149,7 +149,7 @@ module.exports.bimbofy = function (text, bf) {
    text = doc.out('text')
 
    if (enabled) {
-      //text = manualProcessing(text, bf)
+      text = manualProcessing(text, bf)
    }
    return text
 }
