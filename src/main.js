@@ -36,8 +36,10 @@ module.exports.bimbofy = function (text, bf) {
    // Spell out numbers
    let doc = nlp(text)
 
-   doc.sentences(0)
-   .prepend('soo')
+   console.log(nlp('i worked at google').normalize().text())
+   doc.sentences().prepend("Soo")
+   doc.toTitleCase()
+   console.log(doc.out('text'))
 
    if (bf > 0.5) {
       //doc.values().toText()
@@ -50,25 +52,27 @@ module.exports.bimbofy = function (text, bf) {
       // Begin some sentences with "Sooo"
       // End some sentences with ", like, you know"
       //doc.out('debug')
-      /*doc.sentences().forEach((match) => {
+      doc.sentences().forEach((match) => {
          //let sentence = nlp(match.data()[0].text)
          //sentence.sentences().prepend('sooo,');
          //console.log("Sentence:", match);
-         match.out('debug')
+         //match.out('debug')
          //match.prepend('soo,')
-      })*/
+      })
       doc.match('#TitleCase').forEach((match) => {
          //match.out('debug')
       })
       // EndQuotation doesn't seem to match anything.
       doc.match('!#EndQuotation #Verb #Noun').forEach((match) => {
-         if (Math.random() < 0.3 * bf && enabled) {
+         if (Math.random() < 0.3 + 2 * bf && enabled) {
             let rw = pickRandomWeighted([
                {spelling: 'basically', weight: 1},
                {spelling: 'totally', weight: 1},
             ]).spelling
-            //console.log("2:", match.data()[0])
+            console.log("1:", match.data()[0])
+            console.log(match.match("@hasPeriod").text());
             match.insertAfter(rw)
+            //match.replaceWith(match.data().normal)
          }
       })
       doc.match('!#EndQuotation [#Conjunction] #Verb').forEach((match) => {
@@ -77,17 +81,18 @@ module.exports.bimbofy = function (text, bf) {
                {spelling: 'basically', weight: 1},
                {spelling: 'totally', weight: 1}
             ]).spelling
-            //console.log("2:", match.data()[0])
+            console.log("2:", match.data()[0])
             match.insertAfter(rw)
          }
       })
-      doc.match('#Value').values().toNumber().forEach((match) => {
+      // TODO Replace numbers with text
+      /*doc.match('#Value').values().toNumber().forEach((match) => {
          let w = match.data()[0].nice
          //match.replace()
          //w.replace('0', '?')
          //console.log(w);
          //match.out('debug')
-      })
+      })*/
       // Country girl speech: giving -> givin'
       doc.not('#Verb$').match('#Verb').match('_ing').forEach((match) => {
          if (Math.random() < 1 && enabled) {
@@ -257,6 +262,7 @@ function misspellByRule(string) {
    string = string.replace(/ces\b/, "cies")
    string = string.replace(/ges\b/, "gies")
    string = string.replace(/uter\b/, "tuer")
+   string = string.replace(/(.)h/, "$1")
    //console.log(string);
    for (let i = 0; i < string.length; i++) {
       let c = string.charAt(i);

@@ -25,12 +25,13 @@
       "start": "webpack-dev-server --open 'opera'"
    },
    "dependencies": {
-      "compromise": "^11.14.3",
+      "compromise": "^12.2.1",
+      "compromise-sentences": "0.0.3",
       "pluralize": "^7.0.0"
    },
    "devDependencies": {
       "esm": "^3.2.25",
-      "webpack": "^4.41.2",
+      "webpack": "^4.41.5",
       "webpack-cli": "^3.3.10"
    }
 }
