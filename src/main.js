@@ -46,9 +46,6 @@ module.exports.bimbofy = function (text, bf) {
    let doc = nlp(text)
 
    if (bf > 0.5) {
-      //doc.values().toText()
-   }
-   if (bf > 0.5) {
       doc.contractions().contract()
    }
    {
@@ -68,7 +65,7 @@ module.exports.bimbofy = function (text, bf) {
       })
       // EndQuotation doesn't seem to match anything.
       doc.match('#Verb #Noun').forEach((match) => {
-         if (Math.random() < 0.3 + 2 * bf && enabled) {
+         if (Math.random() < 0.3 * bf && enabled) {
             let rwBefore = pickRandomWeighted([
                {spelling: 'basically', weight: 1},
                {spelling: 'totally', weight: 1},
@@ -93,27 +90,29 @@ module.exports.bimbofy = function (text, bf) {
       // Simulate number confusion by changing large numbers
       doc.numbers().greaterThan(20).forEach((match) => {
          let value = match.numbers().json()[0].number
-         let newValue = Math.round(value/2 + value * Math.random())
-         if (newValue > 20) {
+         let newValue = Math.round(value - ((value / 2) * bf) + value * Math.random() * bf)
+         if (newValue > 20 && bf > 0.8) {
             newValue = Math.round(newValue/10) * 10
             match.numbers().set(newValue)
-         } if (newValue > 100) {
+         }
+         if (newValue > 100 && bf > 0.7) {
             newValue = Math.round(newValue/100) * 100
             match.numbers().set(newValue)
-         } if (newValue > 1000) {
+         }
+         if (newValue > 1000 && bf > 0.5) {
             newValue = Math.round(newValue/1000) * 1000
             match.numbers().set(newValue)
-         } if (newValue >= 10000) {
+         }
+         if (newValue >= 10000 && bf > 0.2) {
             match.replace("lots")
          }
-         //match.numbers().set(newValue)
-         //console.log("Number", value, match.text());
       })
 
       // Spell out numbers
       doc.numbers().forEach((match) => {
-         match.numbers().toText()
-         //console.log("Number2:", match.text());
+         if (bf > 0.5) {
+            match.numbers().toText()
+         }
       })
 
       // Country girl speech: giving -> givin'
@@ -212,14 +211,16 @@ function manualProcessing(text, bf) {
 
       // DICTIONARY MISSPELLING
       // If there is a misspelling, misspell it
-      let spelling = pickSpelling(word)
+      let spelling = word;
+      if (Math.random() < bf) {
+         spelling = pickSpelling(word)
+      }
       let isSynonym = spelling !== word // Remember if we changed the word.
 
       // Replace underscores in dict with spaces
       if (spelling !== word) {
          word = spelling.replace('_', ' ')
       }
-
 
       // RESTORE
       // Restore capital letter if any
@@ -231,7 +232,7 @@ function manualProcessing(text, bf) {
       // REGEXP MISSPELLING.
       // Re-pluralization can't handle misspelled words, so this is done after.
       // Also only mispell words that we did not find in dictionary.
-      if (!isSynonym && Math.random() < 1 * bf) { // TODO Multiplier to 0.5
+      if (!isSynonym && Math.random() < 1 * bf) {
          word = misspellByRule(word)
       }
 

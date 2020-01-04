@@ -23,4 +23,4 @@ Then she felt a tightness further down as well, in her jeans. She moved her hand
 let text3 = `Who needs brains when you have these? 1, 5, 10, 20, 30, 100, 200, 3000, 10000, 100000, 1000000, 10000000. The that these those thirty.`
 
 //mispell.test();
-console.log(mispell.bimbofy(text3, 1));
+console.log(mispell.bimbofy(text3, 0));
