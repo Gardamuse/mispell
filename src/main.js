@@ -74,7 +74,7 @@ module.exports.bimbofy = function (text, bf) {
                {spelling: 'totally', weight: 1},
                {spelling: 'so', weight: 1}
             ]).spelling
-            console.log("1:", match.data()[0])
+            //console.log("1:", match.data()[0])
             match.prepend(rwBefore)
          }
       })
@@ -85,13 +85,36 @@ module.exports.bimbofy = function (text, bf) {
                {spelling: 'totally', weight: 1},
                {spelling: 'so', weight: 1}
             ]).spelling
-            console.log("2:", match.data()[0])
+            //console.log("2:", match.data()[0])
             match.append(rw)
          }
       })
+
+      // Simulate number confusion by changing large numbers
+      doc.numbers().greaterThan(20).forEach((match) => {
+         let value = match.numbers().json()[0].number
+         let newValue = Math.round(value/2 + value * Math.random())
+         if (newValue > 20) {
+            newValue = Math.round(newValue/10) * 10
+            match.numbers().set(newValue)
+         } if (newValue > 100) {
+            newValue = Math.round(newValue/100) * 100
+            match.numbers().set(newValue)
+         } if (newValue > 1000) {
+            newValue = Math.round(newValue/1000) * 1000
+            match.numbers().set(newValue)
+         } if (newValue >= 10000) {
+            match.replace("lots")
+         }
+         //match.numbers().set(newValue)
+         //console.log("Number", value, match.text());
+      })
+
       // Spell out numbers
-      // TODO Replace numbers with text
-      doc.numbers().toText();
+      doc.numbers().forEach((match) => {
+         match.numbers().toText()
+         //console.log("Number2:", match.text());
+      })
 
       // Country girl speech: giving -> givin'
       doc.not('#Verb$').match('#Verb').match('_ing').forEach((match) => {
@@ -180,9 +203,7 @@ function manualProcessing(text, bf) {
       if (word[0] === word[0].toUpperCase()) capitalLetter = true
       if (word.slice(-1) === word.slice(-1).toUpperCase()) capitalAll = true
       word = word.toLowerCase()
-      if (word == "those") {
-         console.log("those", pluralize(word, 1));
-      }
+
       // Remove plural form. Save it for later.
       let isSingular = false;
       let singular = pluralize(word, 1)

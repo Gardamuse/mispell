@@ -20,7 +20,7 @@ She could feel them now, swelling up. She watched as they expanded out into her 
 Then she felt a tightness further down as well, in her jeans. She moved her hands to her hips, and then felt them slowly pushing out wider. She also felt her ass beginning to get bigger, and let her hands linger there for a moment. Her hands were getting filled out by her inflating rump and couldn't help but like the feeling.
 `
 
-let text3 = `Who needs brains when you have these? 1, 2, 7 and 513. The that these those thirty.`
+let text3 = `Who needs brains when you have these? 1, 5, 10, 20, 30, 100, 200, 3000, 10000, 100000, 1000000, 10000000. The that these those thirty.`
 
-mispell.test();
+//mispell.test();
 console.log(mispell.bimbofy(text3, 1));
