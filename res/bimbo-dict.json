@@ -41,9 +41,7 @@
       "ass"
    ],
    "could": [
-      {
-         "synonym": "should"
-      }
+      "cudd"
    ],
    "computer": [
       "cumputer",
@@ -113,11 +111,7 @@
    ],
    "should": [
       "should",
-      "shud",
-      "would",
-      "wudd",
-      "could",
-      "cudd"
+      "shud"
    ],
    "is": [
       {
@@ -168,18 +162,7 @@
       "than",
       "then"
    ],
-   "that": [
-      "taht",
-      "tht",
-      "dat",
-      "daht",
-      "taht"
-   ],
    "the": [
-      {
-         "spelling": "the",
-         "weight": 2
-      },
       {
          "spelling": "thi",
          "weight": 1
@@ -275,8 +258,6 @@
       }
    ],
    "would": [
-      {
-         "synonym": "should"
-      }
+      "wudd"
    ]
 }

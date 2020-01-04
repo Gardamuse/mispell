@@ -4,9 +4,12 @@ const data = require('./data.js')
 const dict = data.dict
 const pluralize = require('pluralize')
 const nlp = require('compromise')
+const nlpNumbers = require('compromise-numbers')
+const nlpSentences = require('compromise-sentences')
 const metaphone = require('talisman/phonetics/metaphone')
 
-//console.log(dict)
+nlp.extend(nlpNumbers)
+nlp.extend(nlpSentences)
 
 class FrequencyLog {
    constructor() {
@@ -68,38 +71,28 @@ module.exports.bimbofy = function (text, bf) {
          if (Math.random() < 0.3 + 2 * bf && enabled) {
             let rwBefore = pickRandomWeighted([
                {spelling: 'basically', weight: 1},
-               {spelling: 'totally', weight: 1}
+               {spelling: 'totally', weight: 1},
+               {spelling: 'so', weight: 1}
             ]).spelling
-            let rwAfter = pickRandomWeighted([
-               {spelling: 'basically', weight: 1}
-            ]).spelling
-            //console.log("1:", match.data()[0])
-            if (Math.random() < 0.5) {
-               match.prepend(rwBefore)
-            } else {
-               match.append(rwAfter)
-            }
+            console.log("1:", match.data()[0])
+            match.prepend(rwBefore)
          }
       })
       doc.match('!#EndQuotation [#Conjunction] #Verb').forEach((match) => {
          if (Math.random() < 0.3 * bf && enabled) {
             let rw = pickRandomWeighted([
                {spelling: 'basically', weight: 1},
-               {spelling: 'totally', weight: 1}
+               {spelling: 'totally', weight: 1},
+               {spelling: 'so', weight: 1}
             ]).spelling
             console.log("2:", match.data()[0])
-            match.insertAfter(rw)
+            match.append(rw)
          }
       })
       // Spell out numbers
       // TODO Replace numbers with text
-      /*doc.match('#Value').values().toNumber().forEach((match) => {
-         let w = match.data()[0].nice
-         //match.replace()
-         //w.replace('0', '?')
-         //console.log(w);
-         //match.out('debug')
-      })*/
+      doc.numbers().toText();
+
       // Country girl speech: giving -> givin'
       doc.not('#Verb$').match('#Verb').match('_ing').forEach((match) => {
          if (Math.random() < 1 && enabled) {
@@ -113,7 +106,6 @@ module.exports.bimbofy = function (text, bf) {
       doc.not('#Verb$').match('#Verb').forEach((match) => {
          if (fqLog.allowLike() && Math.random() < 0.4 * bf && enabled) {
             let rw = pickRandomWeighted([
-               //{spelling: ' like', weight: 0.7},
                {spelling: ', like, ', weight: 0.7},
                {spelling: ', like whatever, ', weight: 0.1}
             ]).spelling
@@ -176,7 +168,6 @@ function manualProcessing(text, bf) {
    for (let i = 0; i < words.length; i++){
       // PREPARATION
       let word = words[i]
-
       /*if (word === "'" && words[i+1] == "s") {
          words[i] = " "
          words[i+1] = "is"
@@ -189,7 +180,9 @@ function manualProcessing(text, bf) {
       if (word[0] === word[0].toUpperCase()) capitalLetter = true
       if (word.slice(-1) === word.slice(-1).toUpperCase()) capitalAll = true
       word = word.toLowerCase()
-
+      if (word == "those") {
+         console.log("those", pluralize(word, 1));
+      }
       // Remove plural form. Save it for later.
       let isSingular = false;
       let singular = pluralize(word, 1)
@@ -273,7 +266,7 @@ function misspellByRule(string) {
    string = string.replace(/ces\b/, "cies")
    string = string.replace(/ges\b/, "gies")
    string = string.replace(/uter\b/, "tuer")
-   string = string.replace(/\bth\B/, "d")
+   string = string.replace(/\bth(?!i)/, "d") // th -> d, when not followed
    string = string.replace(/ph\B/, "f")
    string = string.replace(/ee/, "ea")
    string = string.replace(/ou/, "u")

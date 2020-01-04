@@ -26,6 +26,7 @@
    },
    "dependencies": {
       "compromise": "^12.2.1",
+      "compromise-numbers": "0.0.2",
       "compromise-sentences": "0.0.3",
       "pluralize": "^7.0.0",
       "talisman": "^0.21.0"
