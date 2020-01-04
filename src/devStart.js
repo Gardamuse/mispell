@@ -1,9 +1,9 @@
 const mispell = require('./main.js')
 //const mispell = require('../dist/mispell.node.js')
 
-let text = `"Fine, fine, I'll do it," she groaned, giving in.
+let text1 = `"Fine, fine, I'll do it," she groaned, giving in.
 
-"Great, it means a lot," said Tim, her boyfriend. He beamed a smile at her before handing over the small bottle. "It may not even work anyway, you're sitting."
+"Great, it means a lot," said Tim, her boyfriend. He beamed a smile at her before handing over the small bottle. "It may not even work anyway, where you're sitting."
 
 Sophie, twenty years old, had been sitting on their couch watching TV when he came in waving a bag around. "Hun, you wouldn't believe what I've bought for 13 dollars," he had said before producing a bottle of purple fluid. He went on to say that he had bought a potion from a stall on the way home from work. Apparently it was supposed to make her more attractive. Like she wasn't attractive enough! What was he trying to say? She thought she looked good enough, with her slim body, long brunette hair and deep green eyes. Sure, she wasn't the curviest of women, but she didn't mind that about herself. She thought Tim shared her view until he came home with the bottle.
 `
@@ -23,4 +23,4 @@ Then she felt a tightness further down as well, in her jeans. She moved her hand
 let text3 = `Who needs brains when you have these?`
 
 //mispell.test();
-console.log(mispell.bimbofy(text3, 1));
+console.log(mispell.bimbofy(text1, 1));

@@ -114,10 +114,11 @@ module.exports.bimbofy = function (text, bf) {
          if (fqLog.allowLike() && Math.random() < 0.4 * bf && enabled) {
             let rw = pickRandomWeighted([
                //{spelling: ' like', weight: 0.7},
-               {spelling: ', like,', weight: 0.7},
-               {spelling: ', like whatever,', weight: 0.1}
+               {spelling: ', like, ', weight: 0.7},
+               {spelling: ', like whatever, ', weight: 0.1}
             ]).spelling
-            match.setPunctuation(rw)//.insertAfter(rw);
+            match.post(rw)
+            //match.append(rw)//.insertAfter(rw);
          }
       })
       doc.not('^#Adjective').match('#Adjective').forEach((match) => {
@@ -273,31 +274,18 @@ function misspellByRule(string) {
    string = string.replace(/ges\b/, "gies")
    string = string.replace(/uter\b/, "tuer")
    string = string.replace(/\bth\B/, "d")
+   string = string.replace(/ph\B/, "f")
    string = string.replace(/ee/, "ea")
    string = string.replace(/ou/, "u")
-   string = string.replace(/e\b/, "")
-   string = string.replace(/\Br\B/, "w") //brains -> bwains
+   string = string.replace(/([sv])e\b/, "$1")
+   string = string.replace(/([b-df-hj-npv-z])r\B/, "$1w") //brains -> bwains
    string = string.replace(/s\b/, "z") //brains -> brainz
-   string = string.replace(/(.)h\B/, "$1")
    //console.log(string);
-   console.log(string, metaphone(string), metaphone("whi"));
 
    for (let i = 0; i < string.length; i++) {
       let c = string.charAt(i);
       if (c === "." || c === "." || c === "!" || c === "?") {
          // Do nothing
-      } else if (lastChar === "t" && c === "h") { // th
-         output = output.slice(0, -1) + "d"
-         lastChar = "d"
-         continue
-      } else if (lastChar === "e" && c === "e") { // ee
-         output = output.slice(0, -1) + "i"
-         lastChar = "i"
-         continue
-      } if (lastChar === "o" && c === "u") { // ou
-         output = output.slice(0, -1) + "u"
-         lastChar = "u"
-         continue
       } else if (c === lastChar) { // Repeated character
          lastChar = c
          continue
@@ -307,4 +295,11 @@ function misspellByRule(string) {
    }
    //console.log(string, "->", output);
    return output
+}
+
+function replaceMaybe(string, regex, replacement, probability) {
+   if (Math.random() < probability) {
+      string = string.replace(regex, replacement)
+   }
+   return string
 }
