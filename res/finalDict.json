@@ -208,6 +208,16 @@
          "weight": 1
       }
    ],
+   "these": [
+      {
+         "spelling": "dese",
+         "weight": 1
+      },
+      {
+         "spelling": "deze",
+         "weight": 1
+      }
+   ],
    "then": [
       {
          "synonym": "than"
@@ -245,6 +255,9 @@
    ],
    "were": [
       "was"
+   ],
+   "who": [
+      "hu"
    ],
    "woman": [
       {

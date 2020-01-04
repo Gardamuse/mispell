@@ -4,6 +4,7 @@ const data = require('./data.js')
 const dict = data.dict
 const pluralize = require('pluralize')
 const nlp = require('compromise')
+const metaphone = require('talisman/phonetics/metaphone')
 
 //console.log(dict)
 
@@ -22,6 +23,12 @@ class FrequencyLog {
    }
 }
 
+module.exports.test = function() {
+   let doc = nlp('He is cool.')
+   doc.sentences().prepend('So i think')
+   console.log(doc.text())
+}
+
 /**
  * @param {double} bf - BimboFactor, a value between 0 and 1 describing the current level of bimbofication.
  */
@@ -33,13 +40,7 @@ module.exports.bimbofy = function (text, bf) {
    enabled = true // Debug tool. Enabled = true makes some transforms not run.
 
    // NATURAL LANGUAGE PROCESSING LIBRARY
-   // Spell out numbers
    let doc = nlp(text)
-
-   console.log(nlp('i worked at google').normalize().text())
-   doc.sentences().prepend("Soo")
-   doc.toTitleCase()
-   console.log(doc.out('text'))
 
    if (bf > 0.5) {
       //doc.values().toText()
@@ -63,16 +64,21 @@ module.exports.bimbofy = function (text, bf) {
          //match.out('debug')
       })
       // EndQuotation doesn't seem to match anything.
-      doc.match('!#EndQuotation #Verb #Noun').forEach((match) => {
+      doc.match('#Verb #Noun').forEach((match) => {
          if (Math.random() < 0.3 + 2 * bf && enabled) {
-            let rw = pickRandomWeighted([
+            let rwBefore = pickRandomWeighted([
                {spelling: 'basically', weight: 1},
-               {spelling: 'totally', weight: 1},
+               {spelling: 'totally', weight: 1}
             ]).spelling
-            console.log("1:", match.data()[0])
-            console.log(match.match("@hasPeriod").text());
-            match.insertAfter(rw)
-            //match.replaceWith(match.data().normal)
+            let rwAfter = pickRandomWeighted([
+               {spelling: 'basically', weight: 1}
+            ]).spelling
+            //console.log("1:", match.data()[0])
+            if (Math.random() < 0.5) {
+               match.prepend(rwBefore)
+            } else {
+               match.append(rwAfter)
+            }
          }
       })
       doc.match('!#EndQuotation [#Conjunction] #Verb').forEach((match) => {
@@ -85,6 +91,7 @@ module.exports.bimbofy = function (text, bf) {
             match.insertAfter(rw)
          }
       })
+      // Spell out numbers
       // TODO Replace numbers with text
       /*doc.match('#Value').values().toNumber().forEach((match) => {
          let w = match.data()[0].nice
@@ -182,26 +189,22 @@ function manualProcessing(text, bf) {
       if (word.slice(-1) === word.slice(-1).toUpperCase()) capitalAll = true
       word = word.toLowerCase()
 
-      // Remove plural form
+      // Remove plural form. Save it for later.
       let isSingular = false;
       let singular = pluralize(word, 1)
       if (singular === word) isSingular = true
       if (word !== "s") word = singular //Ignore lonely 's or they are removed
 
+      // DICTIONARY MISSPELLING
       // If there is a misspelling, misspell it
-      {
-         // DICTIONARY MISSPELLING
-         let spelling = pickSpelling(word)
+      let spelling = pickSpelling(word)
+      let isSynonym = spelling !== word // Remember if we changed the word.
 
-         // Replace underscores in dict with spaces
-         if (spelling !== word) {
-            word = spelling.replace('_', ' ')
-         }
+      // Replace underscores in dict with spaces
+      if (spelling !== word) {
+         word = spelling.replace('_', ' ')
       }
-      if (Math.random() < 0.5 * bf) {
-         // REGEXP MISSPELLING
-         word = misspellByRule(word)
-      }
+
 
       // RESTORE
       // Restore capital letter if any
@@ -209,6 +212,13 @@ function manualProcessing(text, bf) {
       if (capitalAll) word = word.toUpperCase()
       // Restore pluralization
       if (!isSingular) word = pluralize(word, 2)
+
+      // REGEXP MISSPELLING.
+      // Re-pluralization can't handle misspelled words, so this is done after.
+      // Also only mispell words that we did not find in dictionary.
+      if (!isSynonym && Math.random() < 1 * bf) { // TODO Multiplier to 0.5
+         word = misspellByRule(word)
+      }
 
       // Write back
       words[i] = word
@@ -262,8 +272,16 @@ function misspellByRule(string) {
    string = string.replace(/ces\b/, "cies")
    string = string.replace(/ges\b/, "gies")
    string = string.replace(/uter\b/, "tuer")
-   string = string.replace(/(.)h/, "$1")
+   string = string.replace(/\bth\B/, "d")
+   string = string.replace(/ee/, "ea")
+   string = string.replace(/ou/, "u")
+   string = string.replace(/e\b/, "")
+   string = string.replace(/\Br\B/, "w") //brains -> bwains
+   string = string.replace(/s\b/, "z") //brains -> brainz
+   string = string.replace(/(.)h\B/, "$1")
    //console.log(string);
+   console.log(string, metaphone(string), metaphone("whi"));
+
    for (let i = 0; i < string.length; i++) {
       let c = string.charAt(i);
       if (c === "." || c === "." || c === "!" || c === "?") {
