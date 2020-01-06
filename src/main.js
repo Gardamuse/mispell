@@ -3,10 +3,13 @@
 const data = require('./data.js')
 const dict = data.dict
 const pluralize = require('pluralize')
-const nlp = require('compromise')
-const nlpNumbers = require('compromise-numbers')
-const nlpSentences = require('compromise-sentences')
 const metaphone = require('talisman/phonetics/metaphone')
+
+// .default is needed after running webpack for some reason
+// Note that .default can't be used if using this file without webpacking first
+const nlp = require('compromise').default
+const nlpNumbers = require('compromise-numbers').default
+const nlpSentences = require('compromise-sentences').default
 
 nlp.extend(nlpNumbers)
 nlp.extend(nlpSentences)
