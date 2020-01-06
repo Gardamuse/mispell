@@ -16,11 +16,11 @@ nlp.extend(nlpSentences)
 
 class FrequencyLog {
    constructor() {
-      this.lastLike = 0
+      this.lastLike = 2
    }
 
    allowLike() {
-      if (this.lastLike > 2) {
+      if (this.lastLike > 1) {
          this.lastLike = 0
          return true
       }
@@ -127,9 +127,12 @@ module.exports.bimbofy = function (text, bf) {
          }
       })
       //doc.match('(are|were|was)').insertAfter('sooo');
-      // Of everything that is not a verb at end of sentence, pick all verbs
-      doc.not('#Verb$').match('#Verb').forEach((match) => {
-         if (fqLog.allowLike() && Math.random() < 0.4 * bf && enabled) {
+      // Match verbs not followed by "it"
+      // Make sure the web is not at end of sentence
+      // Match on the verb itself
+      doc.not('#Verb$').match('[#Verb] !(it|you|like|#Conjunction)').forEach((match) => {
+         //console.log(match.text(), fqLog.lastLike);
+         if (fqLog.allowLike() && Math.random() < 0.5 * bf && enabled) {
             let rw = pickRandomWeighted([
                {spelling: ', like, ', weight: 0.7},
                {spelling: ', like whatever, ', weight: 0.1}
