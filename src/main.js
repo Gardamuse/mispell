@@ -122,7 +122,6 @@ module.exports.bimbofy = function (text, bf) {
       })
 
       // Spell out numbers
-      console.log(doc.numbers().json());
       doc.numbers().forEach((match) => {
          //console.log(match.text());
          if (bf > 0.5) {
