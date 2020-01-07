@@ -22,6 +22,8 @@ Then she felt a tightness further down as well, in her jeans. She moved her hand
 
 let text3 = `Mispell allows you to easily read or write like a bimbo by translating it to sound dumber. I run very fast and I'm climbing it very well and fucking it very hard.
 
+In addition, numbers like sixty-three or 15003 are able to be scrambled and rounded.
+
 5, 55, 555, 5555, 55555`
 
 //mispell.test();
