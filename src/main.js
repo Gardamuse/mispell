@@ -94,6 +94,7 @@ module.exports.bimbofy = function (text, bf) {
       doc.numbers().greaterThan(20).forEach((match) => {
          let value = match.numbers().json()[0].number
          let newValue = Math.round(value - ((value / 2) * bf) + value * Math.random() * bf)
+         //console.log(value);
          if (newValue >= 10000) {
             if (bf > 0.8) {
                match.replace("lots")
@@ -121,7 +122,9 @@ module.exports.bimbofy = function (text, bf) {
       })
 
       // Spell out numbers
+      console.log(doc.numbers().json());
       doc.numbers().forEach((match) => {
+         //console.log(match.text());
          if (bf > 0.5) {
             match.numbers().toText()
          }
@@ -336,6 +339,6 @@ function replaceMaybe(string, regex, replacement, probability) {
 
 function simplify(match, value, factor) {
    let newValue = Math.floor(value/factor) * factor
-   console.log(value, newValue, factor);
+   //console.log(value, newValue, factor);
    match.numbers().set(newValue)
 }
