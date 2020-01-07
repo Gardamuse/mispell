@@ -12,7 +12,7 @@ const serverConfig = {
       maxEntrypointSize: 350000,
       maxAssetSize: 350000
    },
-   mode: 'development',
+   mode: 'production',
    module: {
    }
 };
