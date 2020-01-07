@@ -94,21 +94,30 @@ module.exports.bimbofy = function (text, bf) {
       doc.numbers().greaterThan(20).forEach((match) => {
          let value = match.numbers().json()[0].number
          let newValue = Math.round(value - ((value / 2) * bf) + value * Math.random() * bf)
-         if (newValue > 20 && bf > 0.8) {
-            newValue = Math.round(newValue/10) * 10
-            match.numbers().set(newValue)
+         if (newValue >= 10000) {
+            if (bf > 0.8) {
+               match.replace("lots")
+            } else if (bf > 0.6) {
+               simplify(match, newValue, 1000)
+            } else if (bf > 0.5) {
+               simplify(match, newValue, 100)
+            }
+         } else if (newValue > 1000) {
+            if (bf > 0.7) {
+               simplify(match, newValue, 1000)
+            } else if (bf > 0.5) {
+               simplify(match, newValue, 100)
+            }
+         } else if (newValue > 100) {
+            if (bf > 0.7) {
+               simplify(match, newValue, 100)
+            }
+         } else if (newValue > 20) {
+            if (bf > 0.8) {
+               simplify(match, newValue, 10)
+            }
          }
-         if (newValue > 100 && bf > 0.7) {
-            newValue = Math.round(newValue/100) * 100
-            match.numbers().set(newValue)
-         }
-         if (newValue > 1000 && bf > 0.5) {
-            newValue = Math.round(newValue/1000) * 1000
-            match.numbers().set(newValue)
-         }
-         if (newValue >= 10000 && bf > 0.2) {
-            match.replace("lots")
-         }
+
       })
 
       // Spell out numbers
@@ -323,4 +332,10 @@ function replaceMaybe(string, regex, replacement, probability) {
       string = string.replace(regex, replacement)
    }
    return string
+}
+
+function simplify(match, value, factor) {
+   let newValue = Math.floor(value/factor) * factor
+   console.log(value, newValue, factor);
+   match.numbers().set(newValue)
 }

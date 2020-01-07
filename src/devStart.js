@@ -20,7 +20,9 @@ She could feel them now, swelling up. She watched as they expanded out into her 
 Then she felt a tightness further down as well, in her jeans. She moved her hands to her hips, and then felt them slowly pushing out wider. She also felt her ass beginning to get bigger, and let her hands linger there for a moment. Her hands were getting filled out by her inflating rump and couldn't help but like the feeling.
 `
 
-let text3 = `Mispell allows you to easily read or write like a bimbo by translating it to sound dumber. I run very fast and I'm climbing it very well and fucking it very hard.`
+let text3 = `Mispell allows you to easily read or write like a bimbo by translating it to sound dumber. I run very fast and I'm climbing it very well and fucking it very hard.
+
+5, 55, 555, 5555, 55555`
 
 //mispell.test();
 console.log(mispell.bimbofy(text3, 1));
