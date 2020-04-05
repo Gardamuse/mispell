@@ -14,21 +14,21 @@
    "madison": [
       "missi"
    ],
-   "anonymous": [
-      "anonymous",
-      "anynomous",
-      "anynomous",
-      "anonymus",
-      "anynomus"
-   ],
    "about": [
       "abat",
       "abaut"
    ],
    "actually": [
-      "actualy",
       "actauly",
-      "actuali"
+      "actuali",
+      "actualy"
+   ],
+   "anonymous": [
+      "anonymous",
+      "anonymus",
+      "anynomous",
+      "anynomous",
+      "anynomus"
    ],
    "are": [
       {
@@ -41,9 +41,9 @@
       }
    ],
    "basically": [
+      "baesicly",
       "basicaly",
-      "basicly",
-      "baesicly"
+      "basicly"
    ],
    "breast": [
       "boob",
@@ -55,48 +55,58 @@
    "butt": [
       "ass"
    ],
+   "computer": [
+      "comptuer",
+      "cumputer",
+      "cumputr"
+   ],
    "could": [
       "cudd"
    ],
-   "computer": [
-      "cumputer",
-      "cumputr",
-      "comptuer"
+   "development": [
+      "delevopment"
    ],
    "doctor": [
       "doc"
-   ],
-   "development": [
-      "delevopment"
    ],
    "dr": [
       "doc"
    ],
    "farther": [
-      "further",
-      "farther"
+      "farther",
+      "further"
    ],
    "favorite": [
       "fav"
-   ],
-   "fewer": [
-      "less",
-      "fewer"
-   ],
-   "further": [
-      {
-         "synonym": "farther"
-      }
    ],
    "female": [
       {
          "synonym": "woman"
       }
    ],
+   "fewer": [
+      "fewer",
+      "less"
+   ],
+   "further": [
+      {
+         "synonym": "farther"
+      }
+   ],
    "game": [
-      "game",
       "gaem",
-      "gam"
+      "gam",
+      "game"
+   ],
+   "is": [
+      {
+         "spelling": "is",
+         "weight": 1
+      },
+      {
+         "spelling": "are",
+         "weight": 1
+      }
    ],
    "know": [
       "knw",
@@ -104,9 +114,9 @@
       "nkow"
    ],
    "large": [
-      "huge",
       "big",
-      "ginormous"
+      "ginormous",
+      "huge"
    ],
    "less": [
       {
@@ -120,27 +130,39 @@
       "like"
    ],
    "love": [
+      "<3",
       "luv",
-      "lve",
-      "<3"
-   ],
-   "should": [
-      "should",
-      "shud"
-   ],
-   "is": [
-      {
-         "spelling": "is",
-         "weight": 1
-      },
-      {
-         "spelling": "are",
-         "weight": 1
-      }
+      "lve"
    ],
    "next": [
-      "nex",
-      "enxt"
+      "enxt",
+      "nex"
+   ],
+   "ok": [
+      "oki",
+      "okee"
+   ],
+   "okay": [
+      {
+         "synonym": "ok"
+      }
+   ],
+   "okey": [
+      {
+         "synonym": "ok"
+      }
+   ],
+   "photo": [
+      {
+         "synonym": "picture"
+      }
+   ],
+   "picture": [
+      "pic"
+   ],
+   "probably": [
+      "probly",
+      "prolly"
    ],
    "room": [
       {
@@ -152,17 +174,9 @@
          "weight": 1
       }
    ],
-   "probably": [
-      "probly",
-      "prolly"
-   ],
-   "photo": [
-      {
-         "synonym": "picture"
-      }
-   ],
-   "picture": [
-      "pic"
+   "should": [
+      "should",
+      "shud"
    ],
    "so": [
       "so",
@@ -170,8 +184,8 @@
       "sooo"
    ],
    "take": [
-      "tak",
-      "taek"
+      "taek",
+      "tak"
    ],
    "than": [
       "than",
@@ -191,6 +205,11 @@
          "weight": 1
       }
    ],
+   "then": [
+      {
+         "synonym": "than"
+      }
+   ],
    "these": [
       {
          "spelling": "dese",
@@ -199,11 +218,6 @@
       {
          "spelling": "deze",
          "weight": 1
-      }
-   ],
-   "then": [
-      {
-         "synonym": "than"
       }
    ],
    "thus": [
@@ -219,25 +233,14 @@
    "video": [
       "vid"
    ],
-   "you": [
-      {
-         "spelling": "ya",
-         "weight": 1
-      },
-      {
-         "spelling": "yah",
-         "weight": 1
-      },
-      {
-         "spelling": "u",
-         "weight": 1
-      }
-   ],
    "was": [
       "were"
    ],
    "were": [
       "was"
+   ],
+   "whatever": [
+      "whatevs"
    ],
    "who": [
       "hu"
@@ -274,5 +277,19 @@
    ],
    "would": [
       "wudd"
+   ],
+   "you": [
+      {
+         "spelling": "ya",
+         "weight": 1
+      },
+      {
+         "spelling": "yah",
+         "weight": 1
+      },
+      {
+         "spelling": "u",
+         "weight": 1
+      }
    ]
 }
