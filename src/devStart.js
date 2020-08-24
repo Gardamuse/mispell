@@ -1,9 +1,9 @@
-const mispell = require('./main.js')
-//const mispell = require('../dist/mispell.node.js')
+//const mispell = require('./main.js')
+const mispell = require('../dist/mispell.node.js')
 
-let text = `"Fine, fine, I'll do it," she groaned, giving in.
+let text1 = `"Fine, fine, I'll do it," she groaned, giving in.
 
-"Great, it means a lot," said Tim, her boyfriend. He beamed a smile at her before handing over the small bottle. "It may not even work anyway, you're sitting."
+"Great, it means a lot," said Tim, her boyfriend. He beamed a smile at her before handing over the small bottle. "It may not even work anyway, where you're sitting."
 
 Sophie, twenty years old, had been sitting on their couch watching TV when he came in waving a bag around. "Hun, you wouldn't believe what I've bought for 13 dollars," he had said before producing a bottle of purple fluid. He went on to say that he had bought a potion from a stall on the way home from work. Apparently it was supposed to make her more attractive. Like she wasn't attractive enough! What was he trying to say? She thought she looked good enough, with her slim body, long brunette hair and deep green eyes. Sure, she wasn't the curviest of women, but she didn't mind that about herself. She thought Tim shared her view until he came home with the bottle.
 `
@@ -20,4 +20,11 @@ She could feel them now, swelling up. She watched as they expanded out into her 
 Then she felt a tightness further down as well, in her jeans. She moved her hands to her hips, and then felt them slowly pushing out wider. She also felt her ass beginning to get bigger, and let her hands linger there for a moment. Her hands were getting filled out by her inflating rump and couldn't help but like the feeling.
 `
 
-console.log(mispell.bimbofy(text2, 1));
+let text3 = `Mispell allows you to easily read or write like a bimbo by translating it to sound dumber. I run very fast and I'm climbing it very well and fucking it very hard.
+
+In addition, numbers like sixty-three or 15003 are able to be scrambled and rounded.
+
+5, 55, 555, 5555, 55555`
+
+//mispell.test();
+console.log(mispell.bimbofy(text3, 1));

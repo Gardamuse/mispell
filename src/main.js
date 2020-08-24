@@ -3,23 +3,36 @@
 const data = require('./data.js')
 const dict = data.dict
 const pluralize = require('pluralize')
-const nlp = require('compromise')
+const metaphone = require('talisman/phonetics/metaphone')
 
-//console.log(dict)
+// .default is needed after running webpack for some reason
+// Note that .default can't be used if using this file without webpacking first
+const nlp = require('compromise').default
+const nlpNumbers = require('compromise-numbers').default
+const nlpSentences = require('compromise-sentences').default
+
+nlp.extend(nlpNumbers)
+nlp.extend(nlpSentences)
 
 class FrequencyLog {
    constructor() {
-      this.lastLike = 0
+      this.lastLike = 2
    }
 
    allowLike() {
-      if (this.lastLike > 2) {
+      if (this.lastLike > 1) {
          this.lastLike = 0
          return true
       }
       this.lastLike += 1
       return false
    }
+}
+
+module.exports.test = function() {
+   let doc = nlp('He is cool.')
+   doc.sentences().prepend('So i think')
+   console.log(doc.text())
 }
 
 /**
@@ -30,18 +43,11 @@ module.exports.bimbofy = function (text, bf) {
    // Replace curly quotes in text
    text = text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
    fqLog = new FrequencyLog()
-   enabled = false
+   enabled = true // Debug tool. Enabled = true makes some transforms not run.
 
    // NATURAL LANGUAGE PROCESSING LIBRARY
-   // Spell out numbers
    let doc = nlp(text)
 
-   doc.sentences(0)
-   .prepend('soo')
-
-   if (bf > 0.5) {
-      //doc.values().toText()
-   }
    if (bf > 0.5) {
       doc.contractions().contract()
    }
@@ -50,44 +56,79 @@ module.exports.bimbofy = function (text, bf) {
       // Begin some sentences with "Sooo"
       // End some sentences with ", like, you know"
       //doc.out('debug')
-      /*doc.sentences().forEach((match) => {
+      doc.sentences().forEach((match) => {
          //let sentence = nlp(match.data()[0].text)
          //sentence.sentences().prepend('sooo,');
          //console.log("Sentence:", match);
-         match.out('debug')
+         //match.out('debug')
          //match.prepend('soo,')
-      })*/
+      })
       doc.match('#TitleCase').forEach((match) => {
          //match.out('debug')
       })
       // EndQuotation doesn't seem to match anything.
-      doc.match('!#EndQuotation #Verb #Noun').forEach((match) => {
+      doc.match('#Verb #Noun').forEach((match) => {
          if (Math.random() < 0.3 * bf && enabled) {
-            let rw = pickRandomWeighted([
+            let rwBefore = pickRandomWeighted([
                {spelling: 'basically', weight: 1},
                {spelling: 'totally', weight: 1},
+               {spelling: 'so', weight: 1}
             ]).spelling
-            //console.log("2:", match.data()[0])
-            match.insertAfter(rw)
+            //console.log("1:", match.data()[0])
+            match.prepend(rwBefore)
          }
       })
       doc.match('!#EndQuotation [#Conjunction] #Verb').forEach((match) => {
          if (Math.random() < 0.3 * bf && enabled) {
             let rw = pickRandomWeighted([
                {spelling: 'basically', weight: 1},
-               {spelling: 'totally', weight: 1}
+               {spelling: 'totally', weight: 1},
+               {spelling: 'so', weight: 1}
             ]).spelling
             //console.log("2:", match.data()[0])
-            match.insertAfter(rw)
+            match.append(rw)
          }
       })
-      doc.match('#Value').values().toNumber().forEach((match) => {
-         let w = match.data()[0].nice
-         //match.replace()
-         //w.replace('0', '?')
-         //console.log(w);
-         //match.out('debug')
+
+      // Simulate number confusion by changing large numbers
+      doc.numbers().greaterThan(20).forEach((match) => {
+         let value = match.numbers().json()[0].number
+         let newValue = Math.round(value - ((value / 2) * bf) + value * Math.random() * bf)
+         //console.log(value);
+         if (newValue >= 10000) {
+            if (bf > 0.8) {
+               match.replace("lots")
+            } else if (bf > 0.6) {
+               simplify(match, newValue, 1000)
+            } else if (bf > 0.5) {
+               simplify(match, newValue, 100)
+            }
+         } else if (newValue > 1000) {
+            if (bf > 0.7) {
+               simplify(match, newValue, 1000)
+            } else if (bf > 0.5) {
+               simplify(match, newValue, 100)
+            }
+         } else if (newValue > 100) {
+            if (bf > 0.7) {
+               simplify(match, newValue, 100)
+            }
+         } else if (newValue > 20) {
+            if (bf > 0.8) {
+               simplify(match, newValue, 10)
+            }
+         }
+
       })
+
+      // Spell out numbers
+      doc.numbers().forEach((match) => {
+         //console.log(match.text());
+         if (bf > 0.5) {
+            match.numbers().toText()
+         }
+      })
+
       // Country girl speech: giving -> givin'
       doc.not('#Verb$').match('#Verb').match('_ing').forEach((match) => {
          if (Math.random() < 1 && enabled) {
@@ -97,15 +138,18 @@ module.exports.bimbofy = function (text, bf) {
          }
       })
       //doc.match('(are|were|was)').insertAfter('sooo');
-      // Of everything that is not a verb at end of sentence, pick all verbs
-      doc.not('#Verb$').match('#Verb').forEach((match) => {
-         if (fqLog.allowLike() && Math.random() < 0.4 * bf && enabled) {
+      // Match verbs not followed by "it"
+      // Make sure the web is not at end of sentence
+      // Match on the verb itself
+      doc.not('#Verb$').match('[#Verb] !(it|you|like|#Conjunction)').forEach((match) => {
+         //console.log(match.text(), fqLog.lastLike);
+         if (fqLog.allowLike() && Math.random() < 0.5 * bf && enabled) {
             let rw = pickRandomWeighted([
-               //{spelling: ' like', weight: 0.7},
-               {spelling: ', like,', weight: 0.7},
-               {spelling: ', like whatever,', weight: 0.1}
+               {spelling: ', like, ', weight: 0.7},
+               {spelling: ', like whatever, ', weight: 0.1}
             ]).spelling
-            match.setPunctuation(rw)//.insertAfter(rw);
+            match.post(rw)
+            //match.append(rw)//.insertAfter(rw);
          }
       })
       doc.not('^#Adjective').match('#Adjective').forEach((match) => {
@@ -149,7 +193,7 @@ module.exports.bimbofy = function (text, bf) {
    text = doc.out('text')
 
    if (enabled) {
-      //text = manualProcessing(text, bf)
+      text = manualProcessing(text, bf)
    }
    return text
 }
@@ -163,7 +207,6 @@ function manualProcessing(text, bf) {
    for (let i = 0; i < words.length; i++){
       // PREPARATION
       let word = words[i]
-
       /*if (word === "'" && words[i+1] == "s") {
          words[i] = " "
          words[i+1] = "is"
@@ -177,25 +220,23 @@ function manualProcessing(text, bf) {
       if (word.slice(-1) === word.slice(-1).toUpperCase()) capitalAll = true
       word = word.toLowerCase()
 
-      // Remove plural form
+      // Remove plural form. Save it for later.
       let isSingular = false;
       let singular = pluralize(word, 1)
       if (singular === word) isSingular = true
       if (word !== "s") word = singular //Ignore lonely 's or they are removed
 
+      // DICTIONARY MISSPELLING
       // If there is a misspelling, misspell it
-      {
-         // DICTIONARY MISSPELLING
-         let spelling = pickSpelling(word)
-
-         // Replace underscores in dict with spaces
-         if (spelling !== word) {
-            word = spelling.replace('_', ' ')
-         }
+      let spelling = word;
+      if (Math.random() < bf) {
+         spelling = pickSpelling(word)
       }
-      if (Math.random() < 0.5 * bf) {
-         // REGEXP MISSPELLING
-         word = misspellByRule(word)
+      let isSynonym = spelling !== word // Remember if we changed the word.
+
+      // Replace underscores in dict with spaces
+      if (spelling !== word) {
+         word = spelling.replace('_', ' ')
       }
 
       // RESTORE
@@ -204,6 +245,13 @@ function manualProcessing(text, bf) {
       if (capitalAll) word = word.toUpperCase()
       // Restore pluralization
       if (!isSingular) word = pluralize(word, 2)
+
+      // REGEXP MISSPELLING.
+      // Re-pluralization can't handle misspelled words, so this is done after.
+      // Also only mispell words that we did not find in dictionary.
+      if (!isSynonym && Math.random() < 1 * bf) {
+         word = misspellByRule(word)
+      }
 
       // Write back
       words[i] = word
@@ -257,23 +305,19 @@ function misspellByRule(string) {
    string = string.replace(/ces\b/, "cies")
    string = string.replace(/ges\b/, "gies")
    string = string.replace(/uter\b/, "tuer")
+   string = string.replace(/\bth(?!i)/, "d") // th -> d, when not followed
+   string = string.replace(/ph\B/, "f")
+   string = string.replace(/ee/, "ea")
+   string = string.replace(/ou/, "u")
+   string = string.replace(/([sv])e\b/, "$1")
+   string = string.replace(/([b-df-hj-npv-z])r\B/, "$1w") //brains -> bwains
+   string = string.replace(/s\b/, "z") //brains -> brainz
    //console.log(string);
+
    for (let i = 0; i < string.length; i++) {
       let c = string.charAt(i);
       if (c === "." || c === "." || c === "!" || c === "?") {
          // Do nothing
-      } else if (lastChar === "t" && c === "h") { // th
-         output = output.slice(0, -1) + "d"
-         lastChar = "d"
-         continue
-      } else if (lastChar === "e" && c === "e") { // ee
-         output = output.slice(0, -1) + "i"
-         lastChar = "i"
-         continue
-      } if (lastChar === "o" && c === "u") { // ou
-         output = output.slice(0, -1) + "u"
-         lastChar = "u"
-         continue
       } else if (c === lastChar) { // Repeated character
          lastChar = c
          continue
@@ -283,4 +327,17 @@ function misspellByRule(string) {
    }
    //console.log(string, "->", output);
    return output
+}
+
+function replaceMaybe(string, regex, replacement, probability) {
+   if (Math.random() < probability) {
+      string = string.replace(regex, replacement)
+   }
+   return string
+}
+
+function simplify(match, value, factor) {
+   let newValue = Math.floor(value/factor) * factor
+   //console.log(value, newValue, factor);
+   match.numbers().set(newValue)
 }

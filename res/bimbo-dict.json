@@ -1,19 +1,19 @@
 {
-   "anonymous": [
-      "anonymous",
-      "anynomous",
-      "anynomous",
-      "anonymus",
-      "anynomus"
-   ],
    "about": [
       "abat",
       "abaut"
    ],
    "actually": [
-      "actualy",
       "actauly",
-      "actuali"
+      "actuali",
+      "actualy"
+   ],
+   "anonymous": [
+      "anonymous",
+      "anonymus",
+      "anynomous",
+      "anynomous",
+      "anynomus"
    ],
    "am": [
       {
@@ -31,9 +31,9 @@
       }
    ],
    "basically": [
+      "baesicly",
       "basicaly",
-      "basicly",
-      "baesicly"
+      "basicly"
    ],
    "breast": [
       "boob",
@@ -54,44 +54,57 @@
       }
    ],
    "computer": [
+      "comptuer",
       "cumputer",
-      "cumputr",
-      "comptuer"
+      "cumputr"
    ],
-   "doctor": [
-      "doc"
+   "could": [
+      "cudd"
    ],
    "development": [
       "delevopment"
+   ],
+   "doctor": [
+      "doc"
    ],
    "dr": [
       "doc"
    ],
    "farther": [
-      "further",
-      "farther"
+      "farther",
+      "further"
    ],
    "favorite": [
       "fav"
-   ],
-   "fewer": [
-      "less",
-      "fewer"
-   ],
-   "further": [
-      {
-         "synonym": "farther"
-      }
    ],
    "female": [
       {
          "synonym": "woman"
       }
    ],
+   "fewer": [
+      "fewer",
+      "less"
+   ],
+   "further": [
+      {
+         "synonym": "farther"
+      }
+   ],
    "game": [
-      "game",
       "gaem",
-      "gam"
+      "gam",
+      "game"
+   ],
+   "is": [
+      {
+         "spelling": "is",
+         "weight": 1
+      },
+      {
+         "spelling": "are",
+         "weight": 1
+      }
    ],
    "know": [
       "knw",
@@ -99,9 +112,9 @@
       "nkow"
    ],
    "large": [
-      "huge",
       "big",
-      "ginormous"
+      "ginormous",
+      "huge"
    ],
    "less": [
       {
@@ -115,17 +128,13 @@
       "like"
    ],
    "love": [
+      "<3",
       "luv",
-      "lve",
-      "<3"
+      "lve"
    ],
-   "should": [
-      "should",
-      "shud",
-      "would",
-      "wudd",
-      "could",
-      "cudd"
+   "next": [
+      "enxt",
+      "nex"
    ],
    "i": [
       {
@@ -138,9 +147,31 @@
          "synonym": "are"
       }
    ],
-   "next": [
-      "nex",
-      "enxt"
+   "ok": [
+      "oki",
+      "okee"
+   ],
+   "okay": [
+      {
+         "synonym": "ok"
+      }
+   ],
+   "okey": [
+      {
+         "synonym": "ok"
+      }
+   ],
+   "photo": [
+      {
+         "synonym": "picture"
+      }
+   ],
+   "picture": [
+      "pic"
+   ],
+   "probably": [
+      "probly",
+      "prolly"
    ],
    "room": [
       {
@@ -152,17 +183,9 @@
          "weight": 1
       }
    ],
-   "probably": [
-      "probly",
-      "prolly"
-   ],
-   "photo": [
-      {
-         "synonym": "picture"
-      }
-   ],
-   "picture": [
-      "pic"
+   "should": [
+      "should",
+      "shud"
    ],
    "so": [
       "so",
@@ -170,25 +193,14 @@
       "sooo"
    ],
    "take": [
-      "tak",
-      "taek"
+      "taek",
+      "tak"
    ],
    "than": [
       "than",
       "then"
    ],
-   "that": [
-      "taht",
-      "tht",
-      "dat",
-      "daht",
-      "taht"
-   ],
    "the": [
-      {
-         "spelling": "the",
-         "weight": 2
-      },
       {
          "spelling": "thi",
          "weight": 1
@@ -205,6 +217,16 @@
    "then": [
       {
          "synonym": "than"
+      }
+   ],
+   "these": [
+      {
+         "spelling": "dese",
+         "weight": 1
+      },
+      {
+         "spelling": "deze",
+         "weight": 1
       }
    ],
    "thus": [
@@ -226,25 +248,17 @@
    "video": [
       "vid"
    ],
-   "you": [
-      {
-         "spelling": "ya",
-         "weight": 1
-      },
-      {
-         "spelling": "yah",
-         "weight": 1
-      },
-      {
-         "spelling": "u",
-         "weight": 1
-      }
-   ],
    "was": [
       "were"
    ],
    "were": [
       "was"
+   ],
+   "whatever": [
+      "whatevs"
+   ],
+   "who": [
+      "hu"
    ],
    "woman": [
       {
@@ -277,8 +291,20 @@
       }
    ],
    "would": [
+      "wudd"
+   ],
+   "you": [
       {
-         "synonym": "should"
+         "spelling": "ya",
+         "weight": 1
+      },
+      {
+         "spelling": "yah",
+         "weight": 1
+      },
+      {
+         "spelling": "u",
+         "weight": 1
       }
    ]
 }

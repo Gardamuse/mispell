@@ -33,8 +33,10 @@ function buildDict(paths) {
 }
 
 function preProcess() {
+   // Parse dollar formatted dictionaries into res/dict.json
    parseDollarDict(['res/wikipedia.dat', 'res/aspell.dat'])
-   let finalDict = buildDict(['res/dict.json', 'res/bimbo-names.json', 'res/bimbo-dict.json'])
+   // Compose final dictionary
+   let finalDict = buildDict([/*'res/dict.json', */'res/bimbo-names.json', 'res/bimbo-dict.json'])
    fs.writeFileSync('res/finalDict.json', JSON.stringify(finalDict, null, 3), 'utf8')
 }
 

@@ -1,10 +1,10 @@
 # README
-This application transforms text into something that sounds more like something a "bimbo" might write. This is done by inserting some words with little meaning like "like", "um" and "basically" into reasonable places in sentences using natural language processing. Words are also misspelled using common misspellings, a curated list of misspellings and some rules (like replacing `tt` with `t` in words). The curated list of misspellings is also used to replace words with synonyms that sound more bimbo-ish, or mean something slightly different (ex: then -> than).
+This application transforms text into something that sounds more like something a "bimbo" might write. This is done by inserting some words with little meaning like "like", "um" and "basically" into reasonable places in sentences using natural language processing. Words are also misspelled using a curated list of misspellings and some rules (like replacing `tt` with `t` in words). The curated list of misspellings is also used to replace words with synonyms that sound more bimbo-ish, or mean something slightly different (ex: then -> than). In addition, numbers like sixty-three, or 1238, or 15003 are able to be scrambled and rounded.
 
 The frequency of replacement and misspelling is decided by a "bimbofactor" value, ranging from 0 to 1. This value can be even higher, which will increase the frequency more, but 1 is balanced to be what sounds maximally bimbo-like while maintaining some level of readability.
 
 Example:
-> This aplicatio transforms text ino something dat sounds, like, more like someding a "bimbo" might write. Dis is absolutely done by inserting, like, smo words wid totally lite meaning like "like", "um" anb "basicaly" into absolutely reasonable palcs in sentences usein, like, uh, naturua language procesing. Words are also misspelled usein ya know, sorta common mispelings, a curated, like, list of misspellings and soe rules (like replacing `t` wih `t` in words). De curated list, like, of mispelins's also used, like, to replace, like, words wih synonyms that sund more bimbo, like,-ish, or mean something slightly absolutely different (ex: then -> then).
+> Thiz aplication transformz text into something dat sundz more like something a "bimbo" might wite. Thiz are done by inserting some wordz with litle meaning like "like", "um" and "baesicly" into uh, reasonable placiez in sentenciez using, like, natural language pwocesing. Wordz are also mispeled using a curated list of mispelingz and some rulez (like replacing `t` with `t` in wordz). De curated list of mispelingz iz also used to basicaly replace wordz with synonymz dat sund more sooo bimbo-ish, or yah nkow, mean something slightly absolutely uh, diferent (ex: than -> dan). In adition, numberz like fifty, or one dusand, or nine dusand are able to be scwambled and runded.
 
 Some odd sentences will always arise, but this should improve over time.
 
@@ -35,7 +35,7 @@ mispell.bimbofy("Hello", 0.75)
 ```
 
 # Development
-Build the project using `npm build`. When developing it is usually necessary to try things out for yourself, this is done in the devStart.js file. Run this file with `npm run devStart`.
+Build the project using `npm run build`. When developing it is usually necessary to try things out for yourself, this is done in the devStart.js file. Run this file with `npm run devStart`.
 
 ## Resources
 The files `res/aspell.dat`, `res/birkbeck.dat` and `res/wikipedia.dat` contain common misspellings in the following format: Each correct word is preceded by a dollar sign and followed by its misspellings, each on one line, without duplicates. (A misspelling might appear more than once in the corpus, but only as a misspelling of different words.) Where the spelling or misspelling contained a space, this has been replaced by an underscore (a_lot, Christ_mas). While most of the misspellings are non-words, there are also some real-word errors, such as "omitted" for "admitted". For more information, see the [page they were downloaded from](https://www.dcs.bbk.ac.uk/~ROGER/corpora.html).
