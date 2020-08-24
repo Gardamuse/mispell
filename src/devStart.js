@@ -27,8 +27,5 @@ In addition, numbers like sixty-three or 15003 are able to be scrambled and roun
 5, 55, 555, 5555, 55555`
 
 //mispell.test();
-//console.log(mispell.bimbofy(text3, 1));
-console.log("hi", mispell.word_complexity("hi"))
-console.log("hello", mispell.word_complexity("hello"))
-console.log("bimbo", mispell.word_complexity("bimbo"))
-console.log("werewolf", mispell.word_complexity("werewolf"))
+//console.log(mispell.bimbofy(text1, 1));
+console.log(mispell.complexity_block(text1, 0.5))
