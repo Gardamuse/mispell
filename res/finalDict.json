@@ -30,6 +30,11 @@
       "anynomous",
       "anynomus"
    ],
+   "am": [
+      {
+         "synonym": "are"
+      }
+   ],
    "are": [
       {
          "spelling": "is",
@@ -55,13 +60,16 @@
    "butt": [
       "ass"
    ],
+   "college": [
+      "collage"
+   ],
+   "could": [
+      "cudd"
+   ],
    "computer": [
       "comptuer",
       "cumputer",
       "cumputr"
-   ],
-   "could": [
-      "cudd"
    ],
    "development": [
       "delevopment"
@@ -100,12 +108,7 @@
    ],
    "is": [
       {
-         "spelling": "is",
-         "weight": 1
-      },
-      {
-         "spelling": "are",
-         "weight": 1
+         "synonym": "are"
       }
    ],
    "know": [
@@ -137,6 +140,12 @@
    "next": [
       "enxt",
       "nex"
+   ],
+   "i": [
+      {
+         "spelling": "me",
+         "weight": 1
+      }
    ],
    "ok": [
       "oki",
@@ -223,6 +232,12 @@
    "thus": [
       {
          "synonym": "so"
+      }
+   ],
+   "university": [
+      {
+         "spelling": "uni",
+         "weight": 1
       }
    ],
    "very": [

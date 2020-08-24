@@ -40,4 +40,17 @@ function preProcess() {
    fs.writeFileSync('res/finalDict.json', JSON.stringify(finalDict, null, 3), 'utf8')
 }
 
+function parseCommonWords() {
+   let data = fs.readFileSync('res/20k-common-words.txt', 'utf8')
+   let lines = data.toString().split('\n')
+   let list = []
+   for (let i = 0; i < lines.length; i++) {
+      list.push(lines[i])
+   }
+   fs.writeFileSync('res/20k-common-words.json',
+       JSON.stringify({list: list}, null, 3), 'utf8'
+   )
+}
+
 preProcess()
+parseCommonWords()
