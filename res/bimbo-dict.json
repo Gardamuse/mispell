@@ -15,6 +15,11 @@
       "actauly",
       "actuali"
    ],
+   "am": [
+      {
+        "synonym": "are"
+      }
+   ],
    "are": [
       {
          "spelling": "is",
@@ -39,6 +44,9 @@
    ],
    "butt": [
       "ass"
+   ],
+   "college": [
+      "collage"
    ],
    "could": [
       {
@@ -119,14 +127,15 @@
       "could",
       "cudd"
    ],
+   "i": [
+      {
+         "spelling": "me",
+         "weight": 1
+      }
+   ],
    "is": [
       {
-         "spelling": "is",
-         "weight": 1
-      },
-      {
-         "spelling": "are",
-         "weight": 1
+         "synonym": "are"
       }
    ],
    "next": [
@@ -201,6 +210,12 @@
    "thus": [
       {
          "synonym": "so"
+      }
+   ],
+   "university": [
+      {
+         "spelling": "uni",
+         "weight": 1
       }
    ],
    "very": [
