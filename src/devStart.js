@@ -1,7 +1,7 @@
 //const mispell = require('./main.js')
 const mispell = require('../dist/mispell.node.js')
 
-let text1 = `"Fine, fine, I'll do it," she groaned, giving in.
+let text1 = `"Fine, fine, I'll do it," she groan groaned, giving in.
 
 "Great, it means a lot," said Tim, her boyfriend. He beamed a smile at her before handing over the small bottle. "It may not even work anyway, where you're sitting."
 
@@ -28,4 +28,4 @@ In addition, numbers like sixty-three or 15003 are able to be scrambled and roun
 
 //mispell.test();
 //console.log(mispell.bimbofy(text1, 1));
-console.log(mispell.complexity_block(text1, 0.5))
+console.log(mispell.scramble_complexity(text1, 1))

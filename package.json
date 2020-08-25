@@ -29,6 +29,7 @@
       "compromise-numbers": "0.0.2",
       "compromise-sentences": "0.0.3",
       "pluralize": "^7.0.0",
+      "seedrandom": "^3.0.5",
       "talisman": "^0.21.0"
    },
    "devDependencies": {

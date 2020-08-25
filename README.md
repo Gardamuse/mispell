@@ -44,5 +44,7 @@ The file `res/bimbo-dict.json` is a custom-built dictionary using the same forma
 
 All dictionaries should use lowercase letters only. Capitalization is always preserved from the text being bimbofied.
 
+The file `res/20k-common-words.txt` is from https://github.com/first20hours/google-10000-english and contains the 20k most common english words in order of how common they are.
+
 ## Natural Language Processing
 Natural language processing is done using the [Compromise](https://github.com/spencermountain/compromise) library. See it's [api documentation](https://observablehq.com/@spencermountain/compromise-api) and [match syntax](https://github.com/spencermountain/compromise/wiki/Match-syntax).
