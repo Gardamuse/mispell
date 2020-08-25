@@ -16,7 +16,11 @@ npm i mispell --save
 
 
 ## Usage
-The library exposes one function `bimbofy(String, Float)` that takes the text you want to transform as the first argument and a number between 0 and 1 to determine how much the text is transformed.
+The library exposes the following functions:
+
+* `bimbofy(String, Float)` takes the text you want to transform as the first argument and a number between 0 and 1 to determine how much the text is transformed.
+* `word_complexity(String)` takes a single word and returns a number 0 or greater, the greater the number, the more complex the word.
+* `scramble_complexity(String, Float)` takes a text to be transformed and a value determining the cutoff value for complexity. Words more complex than the cutoff value will be scrambled.
 
 __Node__:
 ```js

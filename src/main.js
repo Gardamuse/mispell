@@ -38,12 +38,14 @@ function scramble(word, midOnly = true) {
    let mid = word.substr(0, word.length - 1).substr(1)
    let suffix = word.substr(word.length - 1, 1)
 
+   let rng = seedrandom(word)
+
    if (midOnly) {
-      let shuffledMid = mid.split('').sort(function(){return 0.5-Math.random()}).join('');
+      let shuffledMid = mid.split('').sort(function(){return 0.5-rng()}).join('');
       //console.log("|" + prefix + shuffledMid + suffix + "|")
       return prefix + shuffledMid + suffix
    } else {
-      let shuffled = word.split('').sort(function(){return 0.5-Math.random()}).join('');
+      let shuffled = word.split('').sort(function(){return 0.5-rng()}).join('');
       //console.log("|" + shuffled + "|")
       return shuffled
    }
@@ -61,7 +63,13 @@ function randomLetters(length, seed = Math.random()) {
    return result;
 }
 
-module.exports.scramble_complexity = function(text, max_complexity) {
+function bimbofactorToComplexity(bf) {
+   return Math.max(0, 0.2 + (1 - bf) * 5)
+}
+
+module.exports.scramble_complexity = function(text, bf) {
+   max_complexity = bimbofactorToComplexity(bf)
+
    // MANUAL PROCESSING
    // Split text on word boundaries
    let words = text.split(/\b/g)

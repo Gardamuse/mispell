@@ -28,4 +28,4 @@ In addition, numbers like sixty-three or 15003 are able to be scrambled and roun
 
 //mispell.test();
 //console.log(mispell.bimbofy(text1, 1));
-console.log(mispell.scramble_complexity(text1, 1))
+console.log(mispell.scramble_complexity(text1, 0.5))
