@@ -29,12 +29,19 @@ class FrequencyLog {
     }
 }
 
+function getLeadingWhitespace(text) {
+    let noWhiteSpace = text.trimStart()
+    return text.substr(0, text.length - noWhiteSpace.length)
+}
 
 /**
  * @param {double} bf - BimboFactor, a value between 0 and 1 describing the current level of bimbofication.
  */
-module.exports.bimbofy = function (text, bf) {
-    if (text == "") return "";
+module.exports.bimbofy = function (inputText, bf) {
+    // Remove whitespace
+    let text = inputText.trim()
+
+    if (text == "") return inputText;
     // Replace curly quotes in text
     text = text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
     fqLog = new FrequencyLog()
@@ -190,11 +197,17 @@ module.exports.bimbofy = function (text, bf) {
     if (enabled) {
         text = manualProcessing(text, bf)
     }
-    return text
+
+    // Restore leading whitespace
+    let outputText = `${getLeadingWhitespace(inputText)}${text}`
+    return outputText
 }
 
-function manualProcessing(text, bf) {
+function manualProcessing(inputText, bf) {
     // MANUAL PROCESSING
+
+    // Remove whitespace
+    let text = inputText.trim()
     // Split text on word boundaries
     let words = text.split(/\b/g)
 
@@ -202,6 +215,7 @@ function manualProcessing(text, bf) {
     for (let i = 0; i < words.length; i++){
         // PREPARATION
         let word = words[i]
+        if (word.length === 0) continue
         /*if (word === "'" && words[i+1] == "s") {
            words[i] = " "
            words[i+1] = "is"
@@ -253,7 +267,10 @@ function manualProcessing(text, bf) {
     }
     //console.log(misspellByRule("summation"));
 
-    return words.join('')
+    // Join words and restore leading whitespace
+    let outputText = `${getLeadingWhitespace(inputText)}${words.join('')}`
+
+    return outputText
 }
 
 function pickSpelling(word) {

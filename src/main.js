@@ -67,10 +67,22 @@ function bimbofactorToComplexity(bf) {
    return Math.max(0, 0.2 + (1 - bf) * 5)
 }
 
-module.exports.scramble_complexity = function(text, bf) {
-   max_complexity = bimbofactorToComplexity(bf)
+function getLeadingWhitespace(text) {
+   let noWhiteSpace = text.trimStart()
+   return text.substr(0, text.length - noWhiteSpace.length)
+}
 
+function getTrailingWhitespace(text) {
+   let noWhiteSpace = text.trimEnd()
+   return text.substr(noWhiteSpace.length, text.length)
+}
+
+module.exports.scramble_complexity = function(inputText, bf) {
+   max_complexity = bimbofactorToComplexity(bf)
    // MANUAL PROCESSING
+
+   // Remove whitespace
+   let text = inputText.trim()
    // Split text on word boundaries
    let words = text.split(/\b/g)
 
@@ -78,7 +90,9 @@ module.exports.scramble_complexity = function(text, bf) {
    for (let i = 0; i < words.length; i++){
       // PREPARATION
       let word = words[i]
-      if (word.length < 4 || word.charAt(0) === ".") continue
+      if (word.length < 4 || word.charAt(0) === ".") {
+         continue
+      }
 
       // Remove capitalization. Save it for later.
       let capitalLetter = false
@@ -115,5 +129,8 @@ module.exports.scramble_complexity = function(text, bf) {
       words[i] = word
    }
 
-   return words.join('')
+   // Join words and restore leading whitespace
+   let outputText = `${getLeadingWhitespace(inputText)}${words.join('')}`
+
+   return outputText
 }

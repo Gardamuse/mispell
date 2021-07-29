@@ -1,6 +1,6 @@
 {
    "name": "mispell",
-   "version": "1.2.0",
+   "version": "1.2.1",
    "description": "Misspells and modifies text to seem like it was written by a 'bimbo'. Primarily developed for use within a certain erotic fetish, but may have other uses.",
    "keywords": [
       "misspell",
@@ -19,8 +19,8 @@
    "module": "src/main.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
-      "build": "nodejs src/preProcess.js && webpack",
-      "devStart": "nodejs src/preProcess.js && webpack && nodejs src/devStart.js",
+      "build": "node src/preProcess.js && webpack",
+      "devStart": "node src/preProcess.js && webpack && node src/devStart.js",
       "watch": "npx webpack --watch",
       "start": "webpack-dev-server --open 'opera'"
    },

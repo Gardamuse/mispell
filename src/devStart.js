@@ -26,6 +26,9 @@ In addition, numbers like sixty-three or 15003 are able to be scrambled and roun
 
 5, 55, 555, 5555, 55555`
 
+let spaces = "  a           "
+
 //mispell.test();
 //console.log(mispell.bimbofy(text1, 1));
-console.log(mispell.scramble_complexity(text1, 0.5))
+let text = spaces
+console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)
