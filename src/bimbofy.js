@@ -34,6 +34,11 @@ function getLeadingWhitespace(text) {
     return text.substr(0, text.length - noWhiteSpace.length)
 }
 
+function getTrailingWhitespace(text) {
+    let noWhiteSpace = text.trimEnd()
+    return text.substr(noWhiteSpace.length, text.length)
+}
+
 /**
  * @param {double} bf - BimboFactor, a value between 0 and 1 describing the current level of bimbofication.
  */
@@ -199,7 +204,7 @@ module.exports.bimbofy = function (inputText, bf) {
     }
 
     // Restore leading whitespace
-    let outputText = `${getLeadingWhitespace(inputText)}${text}`
+    let outputText = `${getLeadingWhitespace(inputText)}${text}${getTrailingWhitespace(inputText)}`
     return outputText
 }
 

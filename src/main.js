@@ -83,6 +83,7 @@ module.exports.scramble_complexity = function(inputText, bf) {
 
    // Remove whitespace
    let text = inputText.trim()
+   if (text === "") return inputText;
    // Split text on word boundaries
    let words = text.split(/\b/g)
 
@@ -130,7 +131,7 @@ module.exports.scramble_complexity = function(inputText, bf) {
    }
 
    // Join words and restore leading whitespace
-   let outputText = `${getLeadingWhitespace(inputText)}${words.join('')}`
+   let outputText = `${getLeadingWhitespace(inputText)}${words.join('')}${getTrailingWhitespace(inputText)}`
 
    return outputText
 }
