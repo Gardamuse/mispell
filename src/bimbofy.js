@@ -231,7 +231,7 @@ function manualProcessing(inputText, bf) {
         let capitalLetter = false
         let capitalAll = false
         if (word[0] === word[0].toUpperCase()) capitalLetter = true
-        if (word.slice(-1) === word.slice(-1).toUpperCase()) capitalAll = true
+        if (word.slice(-1) === word.slice(-1).toUpperCase() && word.length > 1) capitalAll = true
         word = word.toLowerCase()
 
         // Remove plural form. Save it for later.
