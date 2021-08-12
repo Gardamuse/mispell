@@ -9,8 +9,8 @@ const serverConfig = {
       libraryTarget: 'commonjs2'
    },
    performance: {
-      maxEntrypointSize: 350000,
-      maxAssetSize: 350000
+      maxEntrypointSize: 500000,
+      maxAssetSize: 500000
    },
    mode: 'production',
    module: {
@@ -26,8 +26,8 @@ const clientConfig = {
       libraryTarget: 'var'
    },
    performance: {
-      maxEntrypointSize: 350000,
-      maxAssetSize: 350000
+      maxEntrypointSize: 500000,
+      maxAssetSize: 500000
    },
    mode: 'production',
    module: {
