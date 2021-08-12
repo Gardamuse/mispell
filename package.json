@@ -28,9 +28,9 @@
       "compromise": "^13.11.3",
       "compromise-numbers": "^1.4.0",
       "compromise-sentences": "^0.3.0",
-      "pluralize": "^7.0.0",
+      "pluralize": "^8.0.0",
       "seedrandom": "^3.0.5",
-      "talisman": "^0.21.0"
+      "talisman": "^1.1.4"
    },
    "devDependencies": {
       "esm": "^3.2.25",
