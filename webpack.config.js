@@ -5,14 +5,16 @@ const serverConfig = {
    output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'mispell.node.js',
-      library: 'mispell',
-      libraryTarget: 'umd'
+      library: {
+         name: 'mispell',
+         type: 'commonjs2',
+      },
    },
    performance: {
       maxEntrypointSize: 500000,
       maxAssetSize: 500000
    },
-   mode: 'production',
+   mode: 'development',
    module: {
    }
 };
@@ -22,8 +24,10 @@ const clientConfig = {
    output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'mispell.js',
-      library: 'mispell',
-      libraryTarget: 'var'
+      library: {
+         name: 'mispell',
+         type: 'var',
+      },
    },
    performance: {
       maxEntrypointSize: 500000,

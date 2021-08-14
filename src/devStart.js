@@ -1,5 +1,5 @@
 //const mispell = require('./main.js')
-const mispell = require('../dist/mispell.js')
+const mispell = require('../dist/mispell.node.js').mispell
 
 //import mispell from '../dist/mispell.node.js'
 
@@ -32,6 +32,6 @@ let spaces = "     I am good        "
 
 console.log(mispell)
 //mispell.test();
-//console.log(mispell.bimbofy(text1, 1));
+console.log(mispell.bimbofy(text1, 1));
 let text = spaces
 //console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)

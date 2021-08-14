@@ -1,18 +1,19 @@
+import {bimbofy} from "./bimbofy";
+
 const data = require('./data.js')
 const common_words = data.common_words // 20k most common words in english, all lower-case
 const pluralize = require('pluralize')
-const nlp = require('compromise').default
+const nlp = require('compromise')
 const seedrandom = require('seedrandom')
 
-module.exports.test = function() {
+export function test() {
    let doc = nlp('He is cool.')
    doc.sentences().prepend('So i think')
    console.log(doc.text())
 }
 
-module.exports.bimbofy = require('./bimbofy.js').bimbofy
 
-module.exports.word_complexity = function(word) {
+export function word_complexity(word) {
    let nr_of_words = common_words.size
 
    let doc = nlp(word.toLowerCase())
@@ -77,8 +78,8 @@ function getTrailingWhitespace(text) {
    return text.substr(noWhiteSpace.length, text.length)
 }
 
-module.exports.scramble_complexity = function(inputText, bf) {
-   max_complexity = bimbofactorToComplexity(bf)
+export function scramble_complexity(inputText, bf) {
+   let max_complexity = bimbofactorToComplexity(bf)
    // MANUAL PROCESSING
 
    // Remove whitespace
