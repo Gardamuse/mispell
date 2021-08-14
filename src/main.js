@@ -12,6 +12,7 @@ export function test() {
    console.log(doc.text())
 }
 
+export { bimbofy }
 
 export function word_complexity(word) {
    let nr_of_words = common_words.size
