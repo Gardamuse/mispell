@@ -1,5 +1,7 @@
 //const mispell = require('./main.js')
-const mispell = require('../dist/mispell.node.js')
+const mispell = require('../dist/mispell.js')
+
+//import mispell from '../dist/mispell.node.js'
 
 let text1 = `"Fine, fine, I'll do it," she groan groaned, giving in.
 
@@ -28,7 +30,8 @@ In addition, numbers like sixty-three or 15003 are able to be scrambled and roun
 
 let spaces = "     I am good        "
 
+console.log(mispell)
 //mispell.test();
 //console.log(mispell.bimbofy(text1, 1));
 let text = spaces
-console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)
+//console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)

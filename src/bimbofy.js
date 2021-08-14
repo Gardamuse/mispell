@@ -7,12 +7,12 @@ const metaphone = require('talisman/phonetics/metaphone')
 
 // .default is needed after running webpack for some reason
 // Note that .default can't be used if using this file without webpacking first
-const nlp = require('compromise').default
-const nlpNumbers = require('compromise-numbers').default
-const nlpSentences = require('compromise-sentences').default
+const nlp = require('compromise')
+const nlpNumbers = require('compromise-numbers')
+//const nlpSentences = require('compromise-sentences')
 
 nlp.extend(nlpNumbers)
-nlp.extend(nlpSentences)
+//nlp.extend(nlpSentences)
 
 class FrequencyLog {
     constructor() {
@@ -193,9 +193,6 @@ module.exports.bimbofy = function (inputText, bf) {
 
             }
         })
-        /*doc.adjectives().filter(() => {
-           return Math.random() < 0.25 * bf}).insertBefore('literally')*/
-        //console.log(doc.verbs().data());
     }
     text = doc.out('text')
 
@@ -221,11 +218,6 @@ function manualProcessing(inputText, bf) {
         // PREPARATION
         let word = words[i]
         if (word.length === 0) continue
-        /*if (word === "'" && words[i+1] == "s") {
-           words[i] = " "
-           words[i+1] = "is"
-           continue
-        }*/
 
         // Remove capitalization. Save it for later.
         let capitalLetter = false

@@ -6,7 +6,7 @@ const serverConfig = {
       path: path.resolve(__dirname, 'dist'),
       filename: 'mispell.node.js',
       library: 'mispell',
-      libraryTarget: 'commonjs2'
+      libraryTarget: 'umd'
    },
    performance: {
       maxEntrypointSize: 500000,
