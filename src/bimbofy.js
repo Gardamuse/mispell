@@ -1,18 +1,17 @@
-//import data from './data.js'
-//import nearly from 'nearly'
-const data = require('./data.js')
+import data from './data.js'
 const dict = data.dict
-const pluralize = require('pluralize')
-const metaphone = require('talisman/phonetics/metaphone')
+//import nearly from 'nearly'
+//const data = require('./data.js')
+import pluralize from "pluralize"
+//const metaphone = require('talisman/phonetics/metaphone')
 
 // .default is needed after running webpack for some reason
 // Note that .default can't be used if using this file without webpacking first
-const nlp = require('compromise')
-const nlpNumbers = require('compromise-numbers')
-//const nlpSentences = require('compromise-sentences')
+import nlp from "compromise"
+import nlpNumbers from "compromise-numbers"
+import nlpSentences from "compromise-sentences";
 
 nlp.extend(nlpNumbers)
-//nlp.extend(nlpSentences)
 
 class FrequencyLog {
     constructor() {
@@ -42,15 +41,27 @@ function getTrailingWhitespace(text) {
 /**
  * @param {double} bf - BimboFactor, a value between 0 and 1 describing the current level of bimbofication.
  */
-module.exports.bimbofy = function (inputText, bf) {
+export function bimbofy(inputText, bf) {
     // Remove whitespace
     let text = inputText.trim()
 
-    if (text == "") return inputText;
+    if (text === "") return inputText;
     // Replace curly quotes in text
     text = text.replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"');
-    fqLog = new FrequencyLog()
-    enabled = true // Debug tool. Enabled = true makes some transforms not run.
+
+    text = nlpProcessing(text, bf)
+
+    text = manualProcessing(text, bf)
+
+    // Restore leading whitespace
+    let outputText = `${getLeadingWhitespace(inputText)}${text}${getTrailingWhitespace(inputText)}`
+    return outputText
+}
+
+function nlpProcessing(inputText, bf) {
+    let fqLog = new FrequencyLog()
+
+    let text = inputText
 
     // NATURAL LANGUAGE PROCESSING LIBRARY
     let doc = nlp(text)
@@ -60,22 +71,26 @@ module.exports.bimbofy = function (inputText, bf) {
     }
     {
         let rand = Math.random()
-        // Begin some sentences with "Sooo"
-        // End some sentences with ", like, you know"
-        //doc.out('debug')
+        // Begin and end sentences
+        // BUG: Disabled because sentences that start with a quotation mark has an extra quotation mark inserted
         doc.sentences().forEach((match) => {
-            //let sentence = nlp(match.data()[0].text)
-            //sentence.sentences().prepend('sooo,');
-            //console.log("Sentence:", match);
-            //match.out('debug')
-            //match.prepend('soo,')
+            match.replace('"', '')
+            if (Math.random() < 1 * bf) {
+                console.log("Match:", match.data()[0].text)
+                let end = pickRandomWeighted([
+                    {spelling: 'and stuff', weight: 1},
+                    {spelling: 'or whatever', weight: 1},
+                    {spelling: 'you know', weight: 1},
+                ]).spelling
+                match.append(end)
+            }
         })
         doc.match('#TitleCase').forEach((match) => {
             //match.out('debug')
         })
         // EndQuotation doesn't seem to match anything.
         doc.match('#Verb #Noun').forEach((match) => {
-            if (Math.random() < 0.3 * bf && enabled) {
+            if (Math.random() < 0.3 * bf) {
                 let rwBefore = pickRandomWeighted([
                     {spelling: 'basically', weight: 1},
                     {spelling: 'totally', weight: 1},
@@ -86,7 +101,7 @@ module.exports.bimbofy = function (inputText, bf) {
             }
         })
         doc.match('!#EndQuotation [#Conjunction] #Verb').forEach((match) => {
-            if (Math.random() < 0.3 * bf && enabled) {
+            if (Math.random() < 0.3 * bf) {
                 let rw = pickRandomWeighted([
                     {spelling: 'basically', weight: 1},
                     {spelling: 'totally', weight: 1},
@@ -138,7 +153,7 @@ module.exports.bimbofy = function (inputText, bf) {
 
         // Country girl speech: giving -> givin'
         doc.not('#Verb$').match('#Verb').match('_ing').forEach((match) => {
-            if (Math.random() < 1 && enabled) {
+            if (Math.random() < 1) {
                 let w = match.data()[0].normal
                 match.replaceWith(w.replace('ing', 'in\''))
                 //console.log(match.data()[0]);
@@ -150,7 +165,7 @@ module.exports.bimbofy = function (inputText, bf) {
         // Match on the verb itself
         doc.not('#Verb$').match('[#Verb] !(it|you|like|#Conjunction)').forEach((match) => {
             //console.log(match.text(), fqLog.lastLike);
-            if (fqLog.allowLike() && Math.random() < 0.5 * bf && enabled) {
+            if (fqLog.allowLike() && Math.random() < 0.5 * bf) {
                 let rw = pickRandomWeighted([
                     {spelling: ', like, ', weight: 0.7},
                     {spelling: ', like whatever, ', weight: 0.1}
@@ -181,13 +196,13 @@ module.exports.bimbofy = function (inputText, bf) {
                     {spelling: 'sorta', weight: 1},
                 ]).spelling
 
-                if (Math.random() < 0.2 * bf && enabled) {
+                if (Math.random() < 0.2 * bf) {
                     match.insertBefore(rw2);
                 }
-                if (Math.random() < 0.3 * bf && enabled) {
+                if (Math.random() < 0.3 * bf) {
                     match.insertBefore(rw3);
                 }
-                if (Math.random() < 0.6 * bf && enabled) {
+                if (Math.random() < 0.6 * bf) {
                     match.insertBefore(rw);
                 }
 
@@ -195,14 +210,7 @@ module.exports.bimbofy = function (inputText, bf) {
         })
     }
     text = doc.out('text')
-
-    if (enabled) {
-        text = manualProcessing(text, bf)
-    }
-
-    // Restore leading whitespace
-    let outputText = `${getLeadingWhitespace(inputText)}${text}${getTrailingWhitespace(inputText)}`
-    return outputText
+    return text
 }
 
 function manualProcessing(inputText, bf) {
@@ -235,7 +243,7 @@ function manualProcessing(inputText, bf) {
         // DICTIONARY MISSPELLING
         // If there is a misspelling, misspell it
         let spelling = word;
-        if (Math.random() < bf) {
+        if (Math.random() < bf * 0.5) {
             spelling = pickSpelling(word)
         }
         let isSynonym = spelling !== word // Remember if we changed the word.
@@ -254,8 +262,8 @@ function manualProcessing(inputText, bf) {
 
         // REGEXP MISSPELLING.
         // Re-pluralization can't handle misspelled words, so this is done after.
-        // Also only mispell words that we did not find in dictionary.
-        if (!isSynonym && Math.random() < 1 * bf) {
+        // Also only misspell words that we did not find in dictionary.
+        if (!isSynonym && Math.random() < bf * 0.5) {
             word = misspellByRule(word)
         }
 

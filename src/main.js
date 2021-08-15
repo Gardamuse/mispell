@@ -1,10 +1,11 @@
 import {bimbofy} from "./bimbofy";
 
-const data = require('./data.js')
+import data from "./data.js"
+//const data = require('./data.js')
 const common_words = data.common_words // 20k most common words in english, all lower-case
-const pluralize = require('pluralize')
-const nlp = require('compromise')
-const seedrandom = require('seedrandom')
+import pluralize from "pluralize"
+import nlp from "compromise"
+import seedrandom from "seedrandom"
 
 export function test() {
    let doc = nlp('He is cool.')

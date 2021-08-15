@@ -3,7 +3,7 @@ const mispell = require('../dist/mispell.node.js').mispell
 
 //import mispell from '../dist/mispell.node.js'
 
-let text1 = `"Fine, fine, I'll do it," she groan groaned, giving in.
+let text1 = `"Fine, fine, I'll do it," she groaned, giving in.
 
 "Great, it means a lot," said Tim, her boyfriend. He beamed a smile at her before handing over the small bottle. "It may not even work anyway, where you're sitting."
 
@@ -28,10 +28,12 @@ In addition, numbers like sixty-three or 15003 are able to be scrambled and roun
 
 5, 55, 555, 5555, 55555`
 
+let text4 = `"Good bye he said."`
+
 let spaces = "     I am good        "
 
-console.log(mispell)
+//console.log(mispell)
 //mispell.test();
-console.log(mispell.bimbofy(text1, 1));
+//console.log(mispell.bimbofy(text4, 1));
 let text = spaces
-//console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)
+console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)
