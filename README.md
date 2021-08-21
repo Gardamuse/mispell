@@ -28,6 +28,11 @@ __Node__:
 const mispell = require('mispell') // if installed via npm
 mispell.bimbofy("Hello", 0.75)
 ```
+or
+```js
+// TODO: Shouldn't have to specify dist
+import { mispell } from "mispell/dist/mispell.node"
+```
 
 __Html + JS__, just add a script tag in the html file to load the library before any JS is going to use it:
 ```html

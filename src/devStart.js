@@ -35,5 +35,5 @@ let spaces = "     I am good        "
 //console.log(mispell)
 //mispell.test();
 //console.log(mispell.bimbofy(text4, 1));
-let text = spaces
+let text = text1
 console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)

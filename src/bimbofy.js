@@ -75,7 +75,11 @@ function nlpProcessing(inputText, bf) {
         // BUG: Disabled because sentences that start with a quotation mark has an extra quotation mark inserted
         doc.sentences().forEach((match) => {
             match.replace('"', '')
-            if (Math.random() < 1 * bf) {
+            let likelihood = 0.5
+            if (match.wordCount() <= 3) likelihood *= 0
+            else if (match.wordCount() <= 5) likelihood *= 0.5
+
+            if (Math.random() < likelihood * bf) {
                 console.log("Match:", match.data()[0].text)
                 let end = pickRandomWeighted([
                     {spelling: 'and stuff', weight: 1},
