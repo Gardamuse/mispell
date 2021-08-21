@@ -13,8 +13,8 @@
       "url": "https://blushingdefeat.com"
    },
    "repository": "https://github.com/Gardamuse/mispell",
-   "main": "dist/mispell.node.js",
-   "browser": "dist/mispell.js",
+   "main": "./dist/mispell.node.js",
+   "browser": "./dist/mispell.js",
    "files": [],
    "module": "src/main.js",
    "scripts": {
