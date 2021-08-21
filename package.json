@@ -16,7 +16,6 @@
    "main": "dist/mispell.node.js",
    "browser": "dist/mispell.js",
    "files": [],
-   "module": "src/main.js",
    "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "build": "node src/preProcess.js && webpack",
