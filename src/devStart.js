@@ -30,10 +30,14 @@ In addition, numbers like sixty-three or 15003 are able to be scrambled and roun
 
 let text4 = `"Good bye he said."`
 
+let text5 = `Support Blushing Defeat on Patreon!`
+
+let text6 = `Red shoes in the blue ocean.`
+
 let spaces = "     I am good        "
 
 //console.log(mispell)
 //mispell.test();
 //console.log(mispell.bimbofy(text4, 1));
-let text = text1
+let text = text6
 console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)

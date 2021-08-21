@@ -80,7 +80,7 @@ function nlpProcessing(inputText, bf) {
             else if (match.wordCount() <= 5) likelihood *= 0.5
 
             if (Math.random() < likelihood * bf) {
-                console.log("Match:", match.data()[0].text)
+                //console.log("Match:", match.data()[0].text)
                 let end = pickRandomWeighted([
                     {spelling: 'and stuff', weight: 1},
                     {spelling: 'or whatever', weight: 1},
@@ -100,6 +100,10 @@ function nlpProcessing(inputText, bf) {
                     {spelling: 'totally', weight: 1},
                     {spelling: 'so', weight: 1}
                 ]).spelling
+                let matchText = match.data()[0].text
+                if (startsWithUppercase(matchText)) {
+                    rwBefore = capitalizeFirstLetter(rwBefore)
+                }
                 //console.log("1:", match.data()[0])
                 match.prepend(rwBefore)
             }
@@ -234,7 +238,7 @@ function manualProcessing(inputText, bf) {
         // Remove capitalization. Save it for later.
         let capitalLetter = false
         let capitalAll = false
-        if (word[0] === word[0].toUpperCase()) capitalLetter = true
+        if (startsWithUppercase(word)) capitalLetter = true
         if (word.slice(-1) === word.slice(-1).toUpperCase() && word.length > 1) capitalAll = true
         word = word.toLowerCase()
 
@@ -259,7 +263,7 @@ function manualProcessing(inputText, bf) {
 
         // RESTORE
         // Restore capital letter if any
-        if (capitalLetter) word = word.charAt(0).toUpperCase() + word.slice(1)
+        if (capitalLetter) word = capitalizeFirstLetter(word)
         if (capitalAll) word = word.toUpperCase()
         // Restore pluralization
         if (!isSingular) word = pluralize(word, 2)
@@ -361,4 +365,12 @@ function simplify(match, value, factor) {
     let newValue = Math.floor(value/factor) * factor
     //console.log(value, newValue, factor);
     match.numbers().set(newValue)
+}
+
+function startsWithUppercase(word) {
+    return word[0] === word[0].toUpperCase()
+}
+
+function capitalizeFirstLetter(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1)
 }
