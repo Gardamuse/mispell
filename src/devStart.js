@@ -34,10 +34,10 @@ let text5 = `Support Blushing Defeat on Patreon!`
 
 let text6 = `Red shoes in the blue ocean.`
 
-let spaces = "     I am good        "
+let spaces = "     I am good. That I am.        "
 
 //console.log(mispell)
 //mispell.test();
 //console.log(mispell.bimbofy(text4, 1));
-let text = text6
+let text = spaces
 console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)

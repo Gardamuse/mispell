@@ -216,6 +216,12 @@ function nlpProcessing(inputText, bf) {
 
             }
         })
+        // Replace "I am" as long as it is not at the start of a sentence.
+        doc.sentences().not("^(I am|I'm)").match("(I am|I'm)").forEach((match) => {
+            if (Math.random() < 2 * bf - 1) {
+                match.replaceWith("me is")
+            }
+        })
     }
     text = doc.out('text')
     return text
