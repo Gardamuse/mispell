@@ -34,7 +34,7 @@ export function word_complexity(word) {
    return Math.log(1 + commonality * Math.max(1, word.length - 3))
 }
 
-function scramble(word, midOnly = true) {
+function scramble_word(word, midOnly = true) {
    if (word.length < 4) return word
 
    let prefix = word.substr(0, 1)
@@ -80,7 +80,7 @@ function getTrailingWhitespace(text) {
    return text.substr(noWhiteSpace.length, text.length)
 }
 
-export function scramble_complexity(inputText, bf) {
+export function scramble(inputText, bf) {
    let max_complexity = bimbofactorToComplexity(bf)
    // MANUAL PROCESSING
 
@@ -112,14 +112,14 @@ export function scramble_complexity(inputText, bf) {
       if (word !== "s") word = singular //Ignore lonely 's or they are removed
 
       // SCRAMBLE WORD
-      let complexity = module.exports.word_complexity(word)
-      console.log(("|" + word + "|").padEnd(20), complexity.toFixed(3))
+      let complexity = word_complexity(word)
+      //console.log(("|" + word + "|").padEnd(20), complexity.toFixed(3))
       if (complexity > max_complexity * 4) {
          word = randomLetters(word.length, word)
       } else if (complexity > max_complexity * 2) {
-         word = scramble(word, false)
+         word = scramble_word(word, false)
       } else if (complexity > max_complexity) {
-         word = scramble(word, true)
+         word = scramble_word(word, true)
       }
 
       // RESTORE

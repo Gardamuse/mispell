@@ -39,5 +39,5 @@ let spaces = "     I am good. That I am.        "
 //console.log(mispell)
 //mispell.test();
 //console.log(mispell.bimbofy(text4, 1));
-let text = spaces
-console.log(`Text: "${text}"\n\n Replaced by: "${mispell.bimbofy(text, 1.0)}"`)
+let text = text5
+console.log(`Text: "${text}"\n\n Replaced by: "${mispell.scramble(text, 1.0)}"`)
