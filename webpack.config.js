@@ -15,6 +15,7 @@ const serverConfig = {
       maxAssetSize: 500000
    },
    mode: 'production',
+   devtool: 'cheap-source-map',
    module: {
    }
 };
